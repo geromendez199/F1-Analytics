@@ -1,0 +1,12 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title>Livery Aston Martin 2024</title>
+  <defs>
+    <linearGradient id="aston" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#aston)" />
+  <path d="M0 320 L640 200 L640 280 L0 360 Z" fill="#f59e0b" opacity="0.35" />
+  <path d="M0 80 L640 0 L640 60 L0 140 Z" fill="#bbf7d0" opacity="0.25" />
+</svg>

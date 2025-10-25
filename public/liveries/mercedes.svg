@@ -1,0 +1,13 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title>Livery Mercedes 2024</title>
+  <defs>
+    <linearGradient id="mercedes" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1f2937" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#mercedes)" />
+  <path d="M0 260 L640 180 L640 220 L0 300 Z" fill="#06b6d4" opacity="0.45" />
+  <path d="M0 120 L640 40 L640 80 L0 160 Z" fill="#94a3b8" opacity="0.35" />
+</svg>

@@ -1,0 +1,6 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title>Livery genérica F1</title>
+  <rect width="640" height="360" fill="#1e293b" />
+  <path d="M0 260 L640 200 L640 240 L0 300 Z" fill="#64748b" opacity="0.6" />
+  <path d="M0 80 L640 20 L640 60 L0 120 Z" fill="#0ea5e9" opacity="0.5" />
+</svg>

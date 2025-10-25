@@ -1,0 +1,12 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title>Piloto F1</title>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#475569" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="16" fill="url(#grad)" />
+  <circle cx="64" cy="48" r="28" fill="#cbd5f5" opacity="0.85" />
+  <path d="M28 116c4-30 28-44 36-44s32 14 36 44" fill="#cbd5f5" opacity="0.65" />
+</svg>

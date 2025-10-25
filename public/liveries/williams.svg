@@ -1,0 +1,12 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title>Livery Williams 2024</title>
+  <defs>
+    <linearGradient id="williams" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c4a6e" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#williams)" />
+  <path d="M0 200 L640 100 L640 160 L0 260 Z" fill="#38bdf8" opacity="0.4" />
+  <path d="M0 320 L640 260 L640 360 L0 360 Z" fill="#082f49" opacity="0.45" />
+</svg>

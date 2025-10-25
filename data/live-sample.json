@@ -1,0 +1,15 @@
+{
+  "available": true,
+  "message": "Datos de ejemplo generados localmente",
+  "updatedAt": "2024-09-01T14:25:00Z",
+  "entries": [
+    { "position": 1, "driver": "Max Verstappen", "gap": "Líder", "tyre": "SOFT", "lastLap": "1:25.402" },
+    { "position": 2, "driver": "Lando Norris", "gap": "+2.148", "tyre": "SOFT", "lastLap": "1:25.711" },
+    { "position": 3, "driver": "Charles Leclerc", "gap": "+4.902", "tyre": "SOFT", "lastLap": "1:25.930" },
+    { "position": 4, "driver": "Carlos Sainz", "gap": "+8.420", "tyre": "MED", "lastLap": "1:26.110" },
+    { "position": 5, "driver": "Oscar Piastri", "gap": "+12.301", "tyre": "MED", "lastLap": "1:26.220" },
+    { "position": 6, "driver": "George Russell", "gap": "+15.984", "tyre": "MED", "lastLap": "1:26.482" },
+    { "position": 7, "driver": "Sergio Pérez", "gap": "+19.120", "tyre": "HARD", "lastLap": "1:26.540" },
+    { "position": 8, "driver": "Lewis Hamilton", "gap": "+21.002", "tyre": "HARD", "lastLap": "1:26.603" }
+  ]
+}

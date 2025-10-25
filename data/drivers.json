@@ -1,0 +1,202 @@
+[
+  {
+    "id": "max-verstappen",
+    "apiId": "max_verstappen",
+    "code": "VER",
+    "name": "Max Verstappen",
+    "number": 1,
+    "country": "Netherlands",
+    "teamId": "red-bull",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "sergio-perez",
+    "apiId": "perez",
+    "code": "PER",
+    "name": "Sergio Pérez",
+    "number": 11,
+    "country": "Mexico",
+    "teamId": "red-bull",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "charles-leclerc",
+    "apiId": "leclerc",
+    "code": "LEC",
+    "name": "Charles Leclerc",
+    "number": 16,
+    "country": "Monaco",
+    "teamId": "ferrari",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "carlos-sainz",
+    "apiId": "sainz",
+    "code": "SAI",
+    "name": "Carlos Sainz",
+    "number": 55,
+    "country": "Spain",
+    "teamId": "ferrari",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "lando-norris",
+    "apiId": "norris",
+    "code": "NOR",
+    "name": "Lando Norris",
+    "number": 4,
+    "country": "United Kingdom",
+    "teamId": "mclaren",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "oscar-piastri",
+    "apiId": "piastri",
+    "code": "PIA",
+    "name": "Oscar Piastri",
+    "number": 81,
+    "country": "Australia",
+    "teamId": "mclaren",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "lewis-hamilton",
+    "apiId": "hamilton",
+    "code": "HAM",
+    "name": "Lewis Hamilton",
+    "number": 44,
+    "country": "United Kingdom",
+    "teamId": "mercedes",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "george-russell",
+    "apiId": "russell",
+    "code": "RUS",
+    "name": "George Russell",
+    "number": 63,
+    "country": "United Kingdom",
+    "teamId": "mercedes",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "fernando-alonso",
+    "apiId": "alonso",
+    "code": "ALO",
+    "name": "Fernando Alonso",
+    "number": 14,
+    "country": "Spain",
+    "teamId": "aston-martin",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "lance-stroll",
+    "apiId": "stroll",
+    "code": "STR",
+    "name": "Lance Stroll",
+    "number": 18,
+    "country": "Canada",
+    "teamId": "aston-martin",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "esteban-ocon",
+    "apiId": "ocon",
+    "code": "OCO",
+    "name": "Esteban Ocon",
+    "number": 31,
+    "country": "France",
+    "teamId": "alpine",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "pierre-gasly",
+    "apiId": "gasly",
+    "code": "GAS",
+    "name": "Pierre Gasly",
+    "number": 10,
+    "country": "France",
+    "teamId": "alpine",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "alexander-albon",
+    "apiId": "albon",
+    "code": "ALB",
+    "name": "Alexander Albon",
+    "number": 23,
+    "country": "Thailand",
+    "teamId": "williams",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "logan-sargeant",
+    "apiId": "sargeant",
+    "code": "SAR",
+    "name": "Logan Sargeant",
+    "number": 2,
+    "country": "United States",
+    "teamId": "williams",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "yuki-tsunoda",
+    "apiId": "tsunoda",
+    "code": "TSU",
+    "name": "Yuki Tsunoda",
+    "number": 22,
+    "country": "Japan",
+    "teamId": "rb",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "daniel-ricciardo",
+    "apiId": "ricciardo",
+    "code": "RIC",
+    "name": "Daniel Ricciardo",
+    "number": 3,
+    "country": "Australia",
+    "teamId": "rb",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "valtteri-bottas",
+    "apiId": "bottas",
+    "code": "BOT",
+    "name": "Valtteri Bottas",
+    "number": 77,
+    "country": "Finland",
+    "teamId": "stake",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "zhou-guanyu",
+    "apiId": "zhou",
+    "code": "ZHO",
+    "name": "Zhou Guanyu",
+    "number": 24,
+    "country": "China",
+    "teamId": "stake",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "nico-hulkenberg",
+    "apiId": "hulkenberg",
+    "code": "HUL",
+    "name": "Nico Hülkenberg",
+    "number": 27,
+    "country": "Germany",
+    "teamId": "haas",
+    "photo": "/drivers/placeholder.svg"
+  },
+  {
+    "id": "kevin-magnussen",
+    "apiId": "kevin_magnussen",
+    "code": "MAG",
+    "name": "Kevin Magnussen",
+    "number": 20,
+    "country": "Denmark",
+    "teamId": "haas",
+    "photo": "/drivers/placeholder.svg"
+  }
+]

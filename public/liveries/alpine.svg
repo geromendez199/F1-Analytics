@@ -1,0 +1,12 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title>Livery Alpine 2024</title>
+  <defs>
+    <linearGradient id="alpine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#alpine)" />
+  <path d="M0 300 L640 220 L640 360 L0 360 Z" fill="#ec4899" opacity="0.35" />
+  <path d="M0 60 L640 0 L640 80 L0 140 Z" fill="#f9fafb" opacity="0.45" />
+</svg>

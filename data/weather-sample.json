@@ -1,0 +1,14 @@
+{
+  "now": {
+    "temperature": 24,
+    "description": "Cielo parcialmente nublado",
+    "wind": 12,
+    "humidity": 62
+  },
+  "forecast": [
+    { "session": "FP1", "temperature": 25, "chanceOfRain": 10 },
+    { "session": "FP2", "temperature": 27, "chanceOfRain": 15 },
+    { "session": "QUALY", "temperature": 26, "chanceOfRain": 20 },
+    { "session": "RACE", "temperature": 28, "chanceOfRain": 35 }
+  ]
+}

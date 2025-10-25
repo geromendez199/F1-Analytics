@@ -1,0 +1,12 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title>Livery Haas 2024</title>
+  <defs>
+    <linearGradient id="haas" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1f2937" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#haas)" />
+  <path d="M0 260 L640 180 L640 220 L0 300 Z" fill="#ef4444" opacity="0.4" />
+  <path d="M0 120 L640 40 L640 90 L0 170 Z" fill="#f8fafc" opacity="0.35" />
+</svg>

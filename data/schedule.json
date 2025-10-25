@@ -1,0 +1,410 @@
+[
+  {
+    "round": 1,
+    "grandPrix": "Bahrain Grand Prix",
+    "circuit": {
+      "id": "sakhir",
+      "name": "Bahrain International Circuit",
+      "location": "Sakhir, Bahrain",
+      "tz": "Asia/Bahrain",
+      "geo": { "lat": 26.0325, "lng": 50.5106 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-02-29T16:30:00", "end": "2024-02-29T17:30:00" },
+      { "type": "FP2", "start": "2024-02-29T20:00:00", "end": "2024-02-29T21:00:00" },
+      { "type": "QUALY", "start": "2024-03-01T19:00:00", "end": "2024-03-01T20:00:00" },
+      { "type": "RACE", "start": "2024-03-02T18:00:00", "end": "2024-03-02T20:00:00" }
+    ]
+  },
+  {
+    "round": 2,
+    "grandPrix": "Saudi Arabian Grand Prix",
+    "circuit": {
+      "id": "jeddah",
+      "name": "Jeddah Corniche Circuit",
+      "location": "Jeddah, Saudi Arabia",
+      "tz": "Asia/Riyadh",
+      "geo": { "lat": 21.6319, "lng": 39.1044 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-03-07T16:30:00", "end": "2024-03-07T17:30:00" },
+      { "type": "FP2", "start": "2024-03-07T20:00:00", "end": "2024-03-07T21:00:00" },
+      { "type": "QUALY", "start": "2024-03-08T20:00:00", "end": "2024-03-08T21:00:00" },
+      { "type": "RACE", "start": "2024-03-09T20:00:00", "end": "2024-03-09T22:00:00" }
+    ]
+  },
+  {
+    "round": 3,
+    "grandPrix": "Australian Grand Prix",
+    "circuit": {
+      "id": "albert-park",
+      "name": "Albert Park Circuit",
+      "location": "Melbourne, Australia",
+      "tz": "Australia/Melbourne",
+      "geo": { "lat": -37.8497, "lng": 144.968 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-03-22T12:30:00", "end": "2024-03-22T13:30:00" },
+      { "type": "FP2", "start": "2024-03-22T16:00:00", "end": "2024-03-22T17:00:00" },
+      { "type": "QUALY", "start": "2024-03-23T16:00:00", "end": "2024-03-23T17:00:00" },
+      { "type": "RACE", "start": "2024-03-24T15:00:00", "end": "2024-03-24T17:00:00" }
+    ]
+  },
+  {
+    "round": 4,
+    "grandPrix": "Japanese Grand Prix",
+    "circuit": {
+      "id": "suzuka",
+      "name": "Suzuka International Racing Course",
+      "location": "Suzuka, Japan",
+      "tz": "Asia/Tokyo",
+      "geo": { "lat": 34.8431, "lng": 136.541 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-04-05T11:30:00", "end": "2024-04-05T12:30:00" },
+      { "type": "FP2", "start": "2024-04-05T15:00:00", "end": "2024-04-05T16:00:00" },
+      { "type": "QUALY", "start": "2024-04-06T15:00:00", "end": "2024-04-06T16:00:00" },
+      { "type": "RACE", "start": "2024-04-07T14:00:00", "end": "2024-04-07T16:00:00" }
+    ]
+  },
+  {
+    "round": 5,
+    "grandPrix": "Chinese Grand Prix",
+    "circuit": {
+      "id": "shanghai",
+      "name": "Shanghai International Circuit",
+      "location": "Shanghai, China",
+      "tz": "Asia/Shanghai",
+      "geo": { "lat": 31.3389, "lng": 121.2197 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-04-19T11:30:00", "end": "2024-04-19T12:30:00" },
+      { "type": "SPRINT", "start": "2024-04-20T11:00:00", "end": "2024-04-20T12:00:00" },
+      { "type": "QUALY", "start": "2024-04-20T15:00:00", "end": "2024-04-20T16:00:00" },
+      { "type": "RACE", "start": "2024-04-21T15:00:00", "end": "2024-04-21T17:00:00" }
+    ]
+  },
+  {
+    "round": 6,
+    "grandPrix": "Miami Grand Prix",
+    "circuit": {
+      "id": "miami",
+      "name": "Miami International Autodrome",
+      "location": "Miami, United States",
+      "tz": "America/New_York",
+      "geo": { "lat": 25.958, "lng": -80.2389 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-05-03T14:30:00", "end": "2024-05-03T15:30:00" },
+      { "type": "SPRINT", "start": "2024-05-04T12:00:00", "end": "2024-05-04T13:00:00" },
+      { "type": "QUALY", "start": "2024-05-04T16:00:00", "end": "2024-05-04T17:00:00" },
+      { "type": "RACE", "start": "2024-05-05T16:00:00", "end": "2024-05-05T18:00:00" }
+    ]
+  },
+  {
+    "round": 7,
+    "grandPrix": "Emilia Romagna Grand Prix",
+    "circuit": {
+      "id": "imola",
+      "name": "Autodromo Internazionale Enzo e Dino Ferrari",
+      "location": "Imola, Italy",
+      "tz": "Europe/Rome",
+      "geo": { "lat": 44.3439, "lng": 11.7167 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-05-17T13:30:00", "end": "2024-05-17T14:30:00" },
+      { "type": "FP2", "start": "2024-05-17T17:00:00", "end": "2024-05-17T18:00:00" },
+      { "type": "QUALY", "start": "2024-05-18T16:00:00", "end": "2024-05-18T17:00:00" },
+      { "type": "RACE", "start": "2024-05-19T15:00:00", "end": "2024-05-19T17:00:00" }
+    ]
+  },
+  {
+    "round": 8,
+    "grandPrix": "Monaco Grand Prix",
+    "circuit": {
+      "id": "monaco",
+      "name": "Circuit de Monaco",
+      "location": "Monte Carlo, Monaco",
+      "tz": "Europe/Monaco",
+      "geo": { "lat": 43.7347, "lng": 7.4206 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-05-24T13:30:00", "end": "2024-05-24T14:30:00" },
+      { "type": "FP2", "start": "2024-05-24T17:00:00", "end": "2024-05-24T18:00:00" },
+      { "type": "QUALY", "start": "2024-05-25T16:00:00", "end": "2024-05-25T17:00:00" },
+      { "type": "RACE", "start": "2024-05-26T15:00:00", "end": "2024-05-26T17:00:00" }
+    ]
+  },
+  {
+    "round": 9,
+    "grandPrix": "Canadian Grand Prix",
+    "circuit": {
+      "id": "gilles-villeneuve",
+      "name": "Circuit Gilles Villeneuve",
+      "location": "Montreal, Canada",
+      "tz": "America/Toronto",
+      "geo": { "lat": 45.5, "lng": -73.5228 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-06-07T13:30:00", "end": "2024-06-07T14:30:00" },
+      { "type": "FP2", "start": "2024-06-07T17:00:00", "end": "2024-06-07T18:00:00" },
+      { "type": "QUALY", "start": "2024-06-08T16:00:00", "end": "2024-06-08T17:00:00" },
+      { "type": "RACE", "start": "2024-06-09T14:00:00", "end": "2024-06-09T16:00:00" }
+    ]
+  },
+  {
+    "round": 10,
+    "grandPrix": "Spanish Grand Prix",
+    "circuit": {
+      "id": "barcelona",
+      "name": "Circuit de Barcelona-Catalunya",
+      "location": "Montmeló, Spain",
+      "tz": "Europe/Madrid",
+      "geo": { "lat": 41.57, "lng": 2.2611 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-06-21T13:30:00", "end": "2024-06-21T14:30:00" },
+      { "type": "FP2", "start": "2024-06-21T17:00:00", "end": "2024-06-21T18:00:00" },
+      { "type": "QUALY", "start": "2024-06-22T16:00:00", "end": "2024-06-22T17:00:00" },
+      { "type": "RACE", "start": "2024-06-23T15:00:00", "end": "2024-06-23T17:00:00" }
+    ]
+  },
+  {
+    "round": 11,
+    "grandPrix": "Austrian Grand Prix",
+    "circuit": {
+      "id": "red-bull-ring",
+      "name": "Red Bull Ring",
+      "location": "Spielberg, Austria",
+      "tz": "Europe/Vienna",
+      "geo": { "lat": 47.2197, "lng": 14.7647 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-06-28T12:30:00", "end": "2024-06-28T13:30:00" },
+      { "type": "SPRINT", "start": "2024-06-29T11:00:00", "end": "2024-06-29T12:00:00" },
+      { "type": "QUALY", "start": "2024-06-29T16:00:00", "end": "2024-06-29T17:00:00" },
+      { "type": "RACE", "start": "2024-06-30T15:00:00", "end": "2024-06-30T17:00:00" }
+    ]
+  },
+  {
+    "round": 12,
+    "grandPrix": "British Grand Prix",
+    "circuit": {
+      "id": "silverstone",
+      "name": "Silverstone Circuit",
+      "location": "Silverstone, United Kingdom",
+      "tz": "Europe/London",
+      "geo": { "lat": 52.0786, "lng": -1.0169 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-07-05T12:30:00", "end": "2024-07-05T13:30:00" },
+      { "type": "FP2", "start": "2024-07-05T16:00:00", "end": "2024-07-05T17:00:00" },
+      { "type": "QUALY", "start": "2024-07-06T15:00:00", "end": "2024-07-06T16:00:00" },
+      { "type": "RACE", "start": "2024-07-07T15:00:00", "end": "2024-07-07T17:00:00" }
+    ]
+  },
+  {
+    "round": 13,
+    "grandPrix": "Hungarian Grand Prix",
+    "circuit": {
+      "id": "hungaroring",
+      "name": "Hungaroring",
+      "location": "Budapest, Hungary",
+      "tz": "Europe/Budapest",
+      "geo": { "lat": 47.5789, "lng": 19.2486 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-07-19T13:30:00", "end": "2024-07-19T14:30:00" },
+      { "type": "FP2", "start": "2024-07-19T17:00:00", "end": "2024-07-19T18:00:00" },
+      { "type": "QUALY", "start": "2024-07-20T16:00:00", "end": "2024-07-20T17:00:00" },
+      { "type": "RACE", "start": "2024-07-21T15:00:00", "end": "2024-07-21T17:00:00" }
+    ]
+  },
+  {
+    "round": 14,
+    "grandPrix": "Belgian Grand Prix",
+    "circuit": {
+      "id": "spa",
+      "name": "Circuit de Spa-Francorchamps",
+      "location": "Stavelot, Belgium",
+      "tz": "Europe/Brussels",
+      "geo": { "lat": 50.4372, "lng": 5.9714 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-07-26T13:30:00", "end": "2024-07-26T14:30:00" },
+      { "type": "SPRINT", "start": "2024-07-27T12:00:00", "end": "2024-07-27T13:00:00" },
+      { "type": "QUALY", "start": "2024-07-27T16:00:00", "end": "2024-07-27T17:00:00" },
+      { "type": "RACE", "start": "2024-07-28T15:00:00", "end": "2024-07-28T17:00:00" }
+    ]
+  },
+  {
+    "round": 15,
+    "grandPrix": "Dutch Grand Prix",
+    "circuit": {
+      "id": "zandvoort",
+      "name": "Circuit Zandvoort",
+      "location": "Zandvoort, Netherlands",
+      "tz": "Europe/Amsterdam",
+      "geo": { "lat": 52.3883, "lng": 4.5409 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-08-23T12:30:00", "end": "2024-08-23T13:30:00" },
+      { "type": "FP2", "start": "2024-08-23T16:00:00", "end": "2024-08-23T17:00:00" },
+      { "type": "QUALY", "start": "2024-08-24T15:00:00", "end": "2024-08-24T16:00:00" },
+      { "type": "RACE", "start": "2024-08-25T15:00:00", "end": "2024-08-25T17:00:00" }
+    ]
+  },
+  {
+    "round": 16,
+    "grandPrix": "Italian Grand Prix",
+    "circuit": {
+      "id": "monza",
+      "name": "Autodromo Nazionale Monza",
+      "location": "Monza, Italy",
+      "tz": "Europe/Rome",
+      "geo": { "lat": 45.6156, "lng": 9.2811 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-08-30T13:30:00", "end": "2024-08-30T14:30:00" },
+      { "type": "FP2", "start": "2024-08-30T17:00:00", "end": "2024-08-30T18:00:00" },
+      { "type": "QUALY", "start": "2024-08-31T16:00:00", "end": "2024-08-31T17:00:00" },
+      { "type": "RACE", "start": "2024-09-01T15:00:00", "end": "2024-09-01T17:00:00" }
+    ]
+  },
+  {
+    "round": 17,
+    "grandPrix": "Azerbaijan Grand Prix",
+    "circuit": {
+      "id": "baku",
+      "name": "Baku City Circuit",
+      "location": "Baku, Azerbaijan",
+      "tz": "Asia/Baku",
+      "geo": { "lat": 40.3725, "lng": 49.8533 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-09-13T13:30:00", "end": "2024-09-13T14:30:00" },
+      { "type": "FP2", "start": "2024-09-13T17:00:00", "end": "2024-09-13T18:00:00" },
+      { "type": "QUALY", "start": "2024-09-14T16:00:00", "end": "2024-09-14T17:00:00" },
+      { "type": "RACE", "start": "2024-09-15T15:00:00", "end": "2024-09-15T17:00:00" }
+    ]
+  },
+  {
+    "round": 18,
+    "grandPrix": "Singapore Grand Prix",
+    "circuit": {
+      "id": "singapore",
+      "name": "Marina Bay Street Circuit",
+      "location": "Singapore",
+      "tz": "Asia/Singapore",
+      "geo": { "lat": 1.2914, "lng": 103.863 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-09-20T17:30:00", "end": "2024-09-20T18:30:00" },
+      { "type": "FP2", "start": "2024-09-20T21:00:00", "end": "2024-09-20T22:00:00" },
+      { "type": "QUALY", "start": "2024-09-21T21:00:00", "end": "2024-09-21T22:00:00" },
+      { "type": "RACE", "start": "2024-09-22T20:00:00", "end": "2024-09-22T22:30:00" }
+    ]
+  },
+  {
+    "round": 19,
+    "grandPrix": "United States Grand Prix",
+    "circuit": {
+      "id": "cota",
+      "name": "Circuit of The Americas",
+      "location": "Austin, United States",
+      "tz": "America/Chicago",
+      "geo": { "lat": 30.1328, "lng": -97.6411 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-10-18T13:30:00", "end": "2024-10-18T14:30:00" },
+      { "type": "SPRINT", "start": "2024-10-19T12:00:00", "end": "2024-10-19T13:00:00" },
+      { "type": "QUALY", "start": "2024-10-19T17:00:00", "end": "2024-10-19T18:00:00" },
+      { "type": "RACE", "start": "2024-10-20T14:00:00", "end": "2024-10-20T16:00:00" }
+    ]
+  },
+  {
+    "round": 20,
+    "grandPrix": "Mexico City Grand Prix",
+    "circuit": {
+      "id": "autodromo-hermanos-rodriguez",
+      "name": "Autódromo Hermanos Rodríguez",
+      "location": "Mexico City, Mexico",
+      "tz": "America/Mexico_City",
+      "geo": { "lat": 19.4042, "lng": -99.0907 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-10-25T13:30:00", "end": "2024-10-25T14:30:00" },
+      { "type": "FP2", "start": "2024-10-25T17:00:00", "end": "2024-10-25T18:00:00" },
+      { "type": "QUALY", "start": "2024-10-26T15:00:00", "end": "2024-10-26T16:00:00" },
+      { "type": "RACE", "start": "2024-10-27T14:00:00", "end": "2024-10-27T16:00:00" }
+    ]
+  },
+  {
+    "round": 21,
+    "grandPrix": "São Paulo Grand Prix",
+    "circuit": {
+      "id": "interlagos",
+      "name": "Autódromo José Carlos Pace",
+      "location": "São Paulo, Brazil",
+      "tz": "America/Sao_Paulo",
+      "geo": { "lat": -23.7036, "lng": -46.6997 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-11-01T12:30:00", "end": "2024-11-01T13:30:00" },
+      { "type": "SPRINT", "start": "2024-11-02T11:30:00", "end": "2024-11-02T12:30:00" },
+      { "type": "QUALY", "start": "2024-11-02T15:00:00", "end": "2024-11-02T16:00:00" },
+      { "type": "RACE", "start": "2024-11-03T14:00:00", "end": "2024-11-03T16:00:00" }
+    ]
+  },
+  {
+    "round": 22,
+    "grandPrix": "Las Vegas Grand Prix",
+    "circuit": {
+      "id": "las-vegas",
+      "name": "Las Vegas Strip Circuit",
+      "location": "Las Vegas, United States",
+      "tz": "America/Los_Angeles",
+      "geo": { "lat": 36.1162, "lng": -115.1767 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-11-21T20:30:00", "end": "2024-11-21T21:30:00" },
+      { "type": "FP2", "start": "2024-11-22T00:00:00", "end": "2024-11-22T01:00:00" },
+      { "type": "QUALY", "start": "2024-11-23T00:00:00", "end": "2024-11-23T01:00:00" },
+      { "type": "RACE", "start": "2024-11-23T22:00:00", "end": "2024-11-24T00:30:00" }
+    ]
+  },
+  {
+    "round": 23,
+    "grandPrix": "Qatar Grand Prix",
+    "circuit": {
+      "id": "losail",
+      "name": "Losail International Circuit",
+      "location": "Lusail, Qatar",
+      "tz": "Asia/Qatar",
+      "geo": { "lat": 25.4889, "lng": 51.4542 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-11-29T16:30:00", "end": "2024-11-29T17:30:00" },
+      { "type": "SPRINT", "start": "2024-11-30T16:00:00", "end": "2024-11-30T17:00:00" },
+      { "type": "QUALY", "start": "2024-11-30T20:00:00", "end": "2024-11-30T21:00:00" },
+      { "type": "RACE", "start": "2024-12-01T20:00:00", "end": "2024-12-01T22:00:00" }
+    ]
+  },
+  {
+    "round": 24,
+    "grandPrix": "Abu Dhabi Grand Prix",
+    "circuit": {
+      "id": "yas-marina",
+      "name": "Yas Marina Circuit",
+      "location": "Abu Dhabi, United Arab Emirates",
+      "tz": "Asia/Dubai",
+      "geo": { "lat": 24.4672, "lng": 54.6031 }
+    },
+    "sessions": [
+      { "type": "FP1", "start": "2024-12-06T13:30:00", "end": "2024-12-06T14:30:00" },
+      { "type": "FP2", "start": "2024-12-06T17:00:00", "end": "2024-12-06T18:00:00" },
+      { "type": "QUALY", "start": "2024-12-07T18:00:00", "end": "2024-12-07T19:00:00" },
+      { "type": "RACE", "start": "2024-12-08T17:00:00", "end": "2024-12-08T19:00:00" }
+    ]
+  }
+]

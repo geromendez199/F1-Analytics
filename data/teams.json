@@ -1,0 +1,92 @@
+[
+  {
+    "id": "red-bull",
+    "apiId": "red_bull",
+    "name": "Oracle Red Bull Racing",
+    "powerUnit": "Honda RBPT",
+    "livery": "/liveries/red-bull.png",
+    "drivers": ["max-verstappen", "sergio-perez"],
+    "points": 0
+  },
+  {
+    "id": "ferrari",
+    "apiId": "ferrari",
+    "name": "Scuderia Ferrari",
+    "powerUnit": "Ferrari",
+    "livery": "/liveries/ferrari.png",
+    "drivers": ["charles-leclerc", "carlos-sainz"],
+    "points": 0
+  },
+  {
+    "id": "mclaren",
+    "apiId": "mclaren",
+    "name": "McLaren Formula 1 Team",
+    "powerUnit": "Mercedes",
+    "livery": "/liveries/mclaren.png",
+    "drivers": ["lando-norris", "oscar-piastri"],
+    "points": 0
+  },
+  {
+    "id": "mercedes",
+    "apiId": "mercedes",
+    "name": "Mercedes-AMG Petronas F1 Team",
+    "powerUnit": "Mercedes",
+    "livery": "/liveries/mercedes.svg",
+    "drivers": ["lewis-hamilton", "george-russell"],
+    "points": 0
+  },
+  {
+    "id": "aston-martin",
+    "apiId": "aston_martin",
+    "name": "Aston Martin Aramco F1 Team",
+    "powerUnit": "Mercedes",
+    "livery": "/liveries/aston-martin.svg",
+    "drivers": ["fernando-alonso", "lance-stroll"],
+    "points": 0
+  },
+  {
+    "id": "alpine",
+    "apiId": "alpine",
+    "name": "BWT Alpine F1 Team",
+    "powerUnit": "Renault",
+    "livery": "/liveries/alpine.svg",
+    "drivers": ["esteban-ocon", "pierre-gasly"],
+    "points": 0
+  },
+  {
+    "id": "williams",
+    "apiId": "williams",
+    "name": "Williams Racing",
+    "powerUnit": "Mercedes",
+    "livery": "/liveries/williams.svg",
+    "drivers": ["alexander-albon", "logan-sargeant"],
+    "points": 0
+  },
+  {
+    "id": "rb",
+    "apiId": "rb",
+    "name": "Visa Cash App RB F1 Team",
+    "powerUnit": "Honda RBPT",
+    "livery": "/liveries/rb.svg",
+    "drivers": ["yuki-tsunoda", "daniel-ricciardo"],
+    "points": 0
+  },
+  {
+    "id": "stake",
+    "apiId": "kick_sauber",
+    "name": "Stake F1 Team Kick Sauber",
+    "powerUnit": "Ferrari",
+    "livery": "/liveries/stake.svg",
+    "drivers": ["valtteri-bottas", "zhou-guanyu"],
+    "points": 0
+  },
+  {
+    "id": "haas",
+    "apiId": "haas",
+    "name": "MoneyGram Haas F1 Team",
+    "powerUnit": "Ferrari",
+    "livery": "/liveries/haas.svg",
+    "drivers": ["nico-hulkenberg", "kevin-magnussen"],
+    "points": 0
+  }
+]
