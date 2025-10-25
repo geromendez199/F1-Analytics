@@ -1,0 +1,25 @@
+{
+  "now": {
+    "temperature": 21,
+    "description": "nubes dispersas",
+    "wind": 5,
+    "humidity": 70
+  },
+  "forecast": [
+    {
+      "session": "FP1",
+      "temperature": 22,
+      "chanceOfRain": 10
+    },
+    {
+      "session": "QUALY",
+      "temperature": 20,
+      "chanceOfRain": 35
+    },
+    {
+      "session": "RACE",
+      "temperature": 19,
+      "chanceOfRain": 55
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "red-bull",
+    "name": "Oracle Red Bull Racing",
+    "powerUnit": "Honda RBPT",
+    "livery": "/liveries/red-bull.png",
+    "drivers": ["max-verstappen"],
+    "points": 423
+  },
+  {
+    "id": "mclaren",
+    "name": "McLaren Formula 1 Team",
+    "powerUnit": "Mercedes",
+    "livery": "/liveries/mclaren.png",
+    "drivers": ["lando-norris"],
+    "points": 356
+  },
+  {
+    "id": "ferrari",
+    "name": "Scuderia Ferrari",
+    "powerUnit": "Ferrari",
+    "livery": "/liveries/ferrari.png",
+    "drivers": ["charles-leclerc"],
+    "points": 340
+  }
+]

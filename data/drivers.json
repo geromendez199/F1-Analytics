@@ -1,0 +1,32 @@
+[
+  {
+    "id": "max-verstappen",
+    "code": "VER",
+    "name": "Max Verstappen",
+    "number": 1,
+    "country": "Netherlands",
+    "teamId": "red-bull",
+    "points": 255,
+    "photo": "/liveries/red-bull-max.png"
+  },
+  {
+    "id": "lando-norris",
+    "code": "NOR",
+    "name": "Lando Norris",
+    "number": 4,
+    "country": "United Kingdom",
+    "teamId": "mclaren",
+    "points": 212,
+    "photo": "/liveries/mclaren-norris.png"
+  },
+  {
+    "id": "charles-leclerc",
+    "code": "LEC",
+    "name": "Charles Leclerc",
+    "number": 16,
+    "country": "Monaco",
+    "teamId": "ferrari",
+    "points": 189,
+    "photo": "/liveries/ferrari-leclerc.png"
+  }
+]
