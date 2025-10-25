@@ -1,0 +1,13 @@
+/node_modules
+/.next
+/out
+pnpm-lock.yaml
+.env
+.env.local
+.env.*.local
+.vercel
+playwright-report
+coverage
+
+# macOS
+.DS_Store
