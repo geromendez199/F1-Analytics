@@ -22,6 +22,14 @@ export default function Live() {
   const { data, error, isLoading, mutate, isValidating } = useSWR<LiveResponse>("/api/live", {
     refreshInterval: 15_000
   });
+  const isRefreshing = isValidating && Boolean(data?.available);
+  const updatedAtLabel = data?.updatedAt
+    ? new Intl.DateTimeFormat(undefined, {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      }).format(new Date(data.updatedAt))
+    : null;
 
   return (
     <section id="live" aria-labelledby="live-title" className="container mx-auto px-6">
@@ -37,7 +45,7 @@ export default function Live() {
         <button
           type="button"
           className="inline-flex items-center gap-2 rounded-full border border-slate-700 px-4 py-2 text-xs font-semibold text-slate-200 transition hover:border-slate-500"
-          onClick={() => mutate(undefined, { revalidate: true })}
+          onClick={() => void mutate(undefined, { revalidate: true })}
           disabled={isValidating}
         >
           {isValidating ? "Actualizando…" : "Refrescar"}
@@ -54,20 +62,23 @@ export default function Live() {
           <div className="space-y-2 text-sm text-slate-300">
             <p>{data.message}</p>
             <p className="text-xs text-slate-500">
-              Última actualización: {new Date(data.updatedAt).toLocaleTimeString()}
+              Última actualización: {updatedAtLabel ?? "–"}
             </p>
           </div>
         )}
         {data && data.available && (
-          <div className="space-y-4" aria-live="polite">
+          <div className="space-y-4" aria-live="polite" aria-busy={isRefreshing}>
             {data.message && (
               <p className="text-xs uppercase tracking-widest text-slate-400">{data.message}</p>
             )}
-            <p className="text-xs text-slate-500">
-              Última actualización: {new Date(data.updatedAt).toLocaleTimeString()}
+            <p className="text-xs text-slate-500" id="live-updated-at">
+              Última actualización: {updatedAtLabel ?? "–"}
             </p>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-slate-800 text-sm">
+              <table
+                className="min-w-full divide-y divide-slate-800 text-sm"
+                aria-describedby="live-updated-at"
+              >
                 <thead>
                   <tr className="text-left text-xs uppercase tracking-widest text-slate-400">
                     <th scope="col" className="py-2">
