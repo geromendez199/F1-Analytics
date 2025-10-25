@@ -59,7 +59,7 @@ export default function Live() {
           </div>
         )}
         {data && data.available && (
-          <div className="space-y-4">
+          <div className="space-y-4" aria-live="polite">
             {data.message && (
               <p className="text-xs uppercase tracking-widest text-slate-400">{data.message}</p>
             )}
@@ -70,25 +70,27 @@ export default function Live() {
               <table className="min-w-full divide-y divide-slate-800 text-sm">
                 <thead>
                   <tr className="text-left text-xs uppercase tracking-widest text-slate-400">
-                    <th className="py-2">Pos</th>
-                    <th>Driver</th>
-                  <th>Gap</th>
-                  <th>Goma</th>
-                  <th>Última Vuelta</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-800 text-slate-200">
-                {data.entries.map((entry) => (
-                  <tr key={entry.position}>
-                    <td className="py-2 font-semibold">{entry.position}</td>
-                    <td>{entry.driver}</td>
-                    <td>{entry.gap}</td>
-                    <td>{entry.tyre}</td>
-                    <td>{entry.lastLap}</td>
+                    <th scope="col" className="py-2">
+                      Pos
+                    </th>
+                    <th scope="col">Piloto</th>
+                    <th scope="col">Intervalo</th>
+                    <th scope="col">Neumático</th>
+                    <th scope="col">Última vuelta</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-slate-800 text-slate-200">
+                  {data.entries.map((entry) => (
+                    <tr key={entry.position}>
+                      <td className="py-2 font-semibold">{entry.position}</td>
+                      <td>{entry.driver}</td>
+                      <td>{entry.gap}</td>
+                      <td>{entry.tyre}</td>
+                      <td>{entry.lastLap}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         )}
