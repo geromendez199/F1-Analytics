@@ -226,4 +226,4 @@ Notas finales
 , rendimiento y confiabilidad.
         •       La integración de fuentes live depende de disponibilidad y términos legales. El proyecto está preparado para act
 ivarlas de forma segura y opcional.
-root@edb448dbb67c:/workspace/F1-Analytics#
+
