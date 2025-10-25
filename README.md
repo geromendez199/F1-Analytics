@@ -208,6 +208,80 @@ gurada.
         •       /#hero · /#live · /#calendario · /#pilotos · /#escuderias · /#autos · /#cubiertas · /#banderas · /#clima · /#res
 ultados · /#acerca
 
+# F1-Analytics: Integración de APIs de Fórmula 1  
+Repositorio del proyecto **F1-Analytics** (dashboard, análisis y visualización) con los principales puntos de entrada de datos (APIs) para la categoría Formula One World Championship.
+
+## Objetivo  
+Este proyecto consume múltiples fuentes de datos de F1 (histórico + live timing) para alimentar pipelines, bases de datos (ej. Supabase), visualizaciones en Vercel, prototipos de hardware (dron, IoT) y análisis automáticos.  
+El archivo que sigue detalla cada API soportada, su cobertura, requisitos y notas de integración.
+
+---
+
+## Lista de APIs disponibles  
+| # | API | Cobertura / Qué ofrece | URL / Sitio | Notas clave |
+|---|-----|------------------------|-------------|------------|
+| 1 | **Ergast API** | Datos históricos de F1 (resultados, pilotos, circuitos) desde 1950.  [oai_citation:0‡Documentador de Postman](https://documenter.getpostman.com/view/11586746/SztEa7bL?utm_source=chatgpt.com) | `http://ergast.com/api/f1/` | Gratuita, sin autenticación (o mínimo) para uso no comercial. Buen “backbone” histórico. |
+| 2 | **Jolpica-F1 (Ergast compatible)** | Sustituto moderno de Ergast, datos históricos.  [oai_citation:1‡reddit.com](https://www.reddit.com/r/F1DataAnalysis/comments/16w84uz/openf1_an_api_for_realtime_f1_data/?utm_source=chatgpt.com) | `https://api.jolpi.ca/ergast/f1/` (ver GitHub) | Ideal para asegurar continuidad si Ergast cambia. |
+| 3 | **FastF1 API / OpenF1** | Datos históricos + telemetría + sesiones + live ~aunque live pago.  [oai_citation:2‡OpenF1](https://openf1.org/?utm_source=chatgpt.com) | `https://api.openf1.org/v1/` | Libre para histórico, live requiere cuenta. Buen para prototipo / drone analytics. |
+| 4 | **Sportradar AG – Formula 1 API** | Cobertura profesional: calendarios, live, laps, perfiles de pilotos‐equipos.  [oai_citation:3‡Getting Started](https://developer.sportradar.com/racing/reference/f1-overview?utm_source=chatgpt.com) | Developer portal: *developer.sportradar.com* | Pago, autenticación obligatoria. Ideal para versión “productiva”. |
+| 5 | **Sportmonks – Formula 1 API** | Datos completos: vueltas, equipos, pilotos, real-time/live scores.  [oai_citation:4‡Sportmonks](https://www.sportmonks.com/formula-one-api/?utm_source=chatgpt.com) | *sportmonks.com/formula-one-api/* | Precio moderado; buena opción intermedia entre hobby/profesional. |
+| 6 | **API-Sports – Formula 1** | API general de deportes que soporta F1: resultados, pilotos, temporadas.  [oai_citation:5‡api-sports](https://api-sports.io/documentation/formula-1/v1?utm_source=chatgpt.com) | *api-sports.io/documentation/formula-1/v1* | Puede servir para integrar datos menos “live”. |
+| 7 | **Zyla Labs – Formula One Data API** | API de mercado (API marketplace) con datos históricos y live de F1: temporadas, pilotos, equipos, sesiones.  [oai_citation:6‡Zyla API Hub](https://zylalabs.com/api-marketplace/sports%2B%26%2Bgaming/formula%2Bone%2Bdata%2Bapi/1598?utm_source=chatgpt.com) | *zylalabs.com/api-marketplace/sports+&+gaming/formula+one+data+api/1598* | Precio según plan, buen respaldo “general”. |
+| 8 | **RapidAPI – API Formula 1** | Catálogo de API en RapidAPI con endpoints de F1: carreras, pilotos, rankings.  [oai_citation:7‡rapidapi.com](https://rapidapi.com/api-sports/api/api-formula-1?utm_source=chatgpt.com) | *rapidapi.com/api-sports/api/api-formula-1* | Fácil de probar, buen para prototipos rápidos. |
+| 9 | **F1LivePulse – Formula 1 Live Data API** | Datos ultra-live: posiciones, pit stops, radio del equipo, clima, etc.  [oai_citation:8‡Formula Live Pulse](https://www.f1livepulse.com/en/formula-1-api/?utm_source=chatgpt.com) | *f1livepulse.com/en/formula-1-api/* | Alto nivel, posiblemente para uso comercial/media. Ver latencia y licencia. |
+| 10 | **F1 Schedule API (Apiary)** | Enfoque específico en calendario, fechas y sesiones de F1.  [oai_citation:9‡f1scheduleapi.docs.apiary.io](https://f1scheduleapi.docs.apiary.io/?utm_source=chatgpt.com) | *f1scheduleapi.docs.apiary.io* | Buena para integración del calendario en tu dashboard (ej: drone/evento + horario). |
+
+---
+
+## Cómo integrar estas APIs en F1-Analytics  
+### Paso a paso  
+1. Crear archivo de configuración `apis.config.json` donde definas cada API: nombre, baseURL, key/token (o null si libre), tipo (histo/live).  
+2. En tu pipeline de ingestión (ej: Supabase + Next.js backend):  
+   - Módulo para “historical ingest”: usar Ergast/Jolpica/OpenF1 para cargar temporadas pasadas, pilotos, equipos, resultados.  
+   - Módulo para “live ingest”: en días de GP usar Sportmonks/Sportradar/F1LivePulse para latencia mínima, actualizar tablas de vueltas, posiciones, pit stops en tiempo real.  
+3. Definir un esquema de base de datos (ej: PostgreSQL en Supabase): tablas como `seasons`, `events`, `drivers`, `teams`, `sessions`, `laps`, `live_positions`, `pit_stops`.  
+4. Configurar en Vercel (o tu hosting) variables de entorno: `API_KEY_SPORTMONKS`, `API_KEY_SPORTRADAR`, etc.  
+5. Escribir utilitarios en TypeScript/Next.js para consumir las APIs, mapear datos al esquema, manejar paginación, límites de llamada.  
+6. Automatizar con GitHub Actions: cada semana/hora ejecutar “historical update”, durante fin de semana de carrera activar “live ingest job”.  
+7. Documentar en README este flujo + qué API usar para qué escenario.
+
+---
+
+## Consideraciones y advertencias  
+- Revisa **licencias de uso**: algunas APIs permiten sólo uso personal/no comercial. Si tu dashboard será público o incluido en un servicio (por ejemplo drone/evento + visualización), asegúrate de la licencia.  
+- Latencia en “live timing”: aunque diga “live”, puede haber retraso de segundos o minutos. Estimar para tu visualización en evento.  
+- Cuotas de llamadas (“rate limits”): planifica ingestión incremental, caching, evitar cuota excedida en día de carrera.  
+- Formatos de datos diferentes: algunas APIs devuelven JSON, otras permiten CSV; algunos campos pueden variar (números de piloto, equipos, claves de sesión). Normalizar.  
+- Estabilidad: APIs gratuitas pueden cambiar o desaparecer (ej: Ergast está “viejo”). Tener plan de respaldo (ej: Jolpica).  
+- Datos de telemetría/pit stops pueden tener restricciones de derechos de autor; verificar uso con fines comerciales.
+
+---
+
+## Ejemplo de configuración (snippet)  
+```json
+{
+  "apis": [
+    {
+      "name": "Ergast",
+      "baseUrl": "http://ergast.com/api/f1",
+      "auth": null,
+      "type": "historical"
+    },
+    {
+      "name": "Sportmonks",
+      "baseUrl": "https://api.sportmonks.com/v3/formula-one",
+      "auth": { "apiKey": "${API_KEY_SPORTMONKS}" },
+      "type": "live_and_historical"
+    },
+    {
+      "name": "OpenF1",
+      "baseUrl": "https://api.openf1.org/v1",
+      "auth": null,
+      "type": "historical_plus_optional_live"
+    }
+    // … demás APIs …
+  ]
+}
 ⸻
 
 📄 Licencia
