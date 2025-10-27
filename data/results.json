@@ -2,63 +2,48 @@
   "lastRace": {
     "grandPrix": "Hungarian Grand Prix",
     "date": "2024-07-21",
-    "winner": {
-      "driverId": "lando-norris",
-      "time": "1:37:24.202"
-    },
+    "winner": { "driverId": "lando-norris", "time": "1:37:24.202" },
     "podium": [
-      {
-        "position": 1,
-        "driverId": "lando-norris",
-        "teamId": "mclaren"
-      },
-      {
-        "position": 2,
-        "driverId": "max-verstappen",
-        "teamId": "red-bull"
-      },
-      {
-        "position": 3,
-        "driverId": "charles-leclerc",
-        "teamId": "ferrari"
-      }
+      { "position": 1, "driverId": "lando-norris", "teamId": "mclaren" },
+      { "position": 2, "driverId": "max-verstappen", "teamId": "red-bull" },
+      { "position": 3, "driverId": "charles-leclerc", "teamId": "ferrari" }
     ]
   },
   "season": {
     "year": 2024,
     "driverStandings": [
-      {
-        "position": 1,
-        "driverId": "max-verstappen",
-        "points": 255
-      },
-      {
-        "position": 2,
-        "driverId": "lando-norris",
-        "points": 212
-      },
-      {
-        "position": 3,
-        "driverId": "charles-leclerc",
-        "points": 189
-      }
+      { "position": 1, "driverId": "max-verstappen", "points": 255 },
+      { "position": 2, "driverId": "lando-norris", "points": 212 },
+      { "position": 3, "driverId": "charles-leclerc", "points": 189 },
+      { "position": 4, "driverId": "carlos-sainz", "points": 176 },
+      { "position": 5, "driverId": "oscar-piastri", "points": 171 },
+      { "position": 6, "driverId": "lewis-hamilton", "points": 125 },
+      { "position": 7, "driverId": "george-russell", "points": 118 },
+      { "position": 8, "driverId": "sergio-perez", "points": 111 },
+      { "position": 9, "driverId": "fernando-alonso", "points": 96 },
+      { "position": 10, "driverId": "lance-stroll", "points": 40 },
+      { "position": 11, "driverId": "nico-hulkenberg", "points": 27 },
+      { "position": 12, "driverId": "yuki-tsunoda", "points": 26 },
+      { "position": 13, "driverId": "esteban-ocon", "points": 18 },
+      { "position": 14, "driverId": "pierre-gasly", "points": 15 },
+      { "position": 15, "driverId": "daniel-ricciardo", "points": 12 },
+      { "position": 16, "driverId": "kevin-magnussen", "points": 6 },
+      { "position": 17, "driverId": "guanyu-zhou", "points": 6 },
+      { "position": 18, "driverId": "valtteri-bottas", "points": 5 },
+      { "position": 19, "driverId": "alexander-albon", "points": 4 },
+      { "position": 20, "driverId": "logan-sargeant", "points": 1 }
     ],
     "constructorStandings": [
-      {
-        "position": 1,
-        "teamId": "red-bull",
-        "points": 423
-      },
-      {
-        "position": 2,
-        "teamId": "mclaren",
-        "points": 356
-      },
-      {
-        "position": 3,
-        "teamId": "ferrari",
-        "points": 340
-      }
+      { "position": 1, "teamId": "red-bull", "points": 423 },
+      { "position": 2, "teamId": "mclaren", "points": 356 },
+      { "position": 3, "teamId": "ferrari", "points": 340 },
+      { "position": 4, "teamId": "mercedes", "points": 243 },
+      { "position": 5, "teamId": "aston-martin", "points": 136 },
+      { "position": 6, "teamId": "rb", "points": 38 },
+      { "position": 7, "teamId": "haas", "points": 33 },
+      { "position": 8, "teamId": "alpine", "points": 33 },
+      { "position": 9, "teamId": "sauber", "points": 11 },
+      { "position": 10, "teamId": "williams", "points": 5 }
     ]
   }
 }

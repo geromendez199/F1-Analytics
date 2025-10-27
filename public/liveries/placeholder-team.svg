@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" fill="none">
+  <rect width="240" height="120" rx="20" fill="#111827" />
+  <rect x="20" y="30" width="200" height="24" rx="12" fill="#1f2937" />
+  <rect x="20" y="66" width="200" height="24" rx="12" fill="#334155" />
+  <text x="120" y="66" text-anchor="middle" font-size="18" fill="#94a3b8" font-family="sans-serif">TEAM</text>
+</svg>

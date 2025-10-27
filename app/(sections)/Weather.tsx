@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { getSampleWeather } from "@/lib/data";
+import { getNextGrandPrix, getSampleWeather, getSchedule } from "@/lib/data";
 import type { WeatherData } from "@/lib/types";
 
 async function getWeather(): Promise<{ weather: WeatherData; live: boolean }> {
@@ -7,7 +7,10 @@ async function getWeather(): Promise<{ weather: WeatherData; live: boolean }> {
     process.env.NEXT_PUBLIC_BASE_URL ??
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
   const url = new URL("/api/weather", base);
-  url.searchParams.set("gp", "15");
+  const targetRound = getNextGrandPrix()?.round ?? getSchedule().at(-1)?.round;
+  if (targetRound) {
+    url.searchParams.set("gp", String(targetRound));
+  }
 
   try {
     const response = await fetch(url, {

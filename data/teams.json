@@ -1,26 +1,12 @@
 [
-  {
-    "id": "red-bull",
-    "name": "Oracle Red Bull Racing",
-    "powerUnit": "Honda RBPT",
-    "livery": "/liveries/red-bull.png",
-    "drivers": ["max-verstappen"],
-    "points": 423
-  },
-  {
-    "id": "mclaren",
-    "name": "McLaren Formula 1 Team",
-    "powerUnit": "Mercedes",
-    "livery": "/liveries/mclaren.png",
-    "drivers": ["lando-norris"],
-    "points": 356
-  },
-  {
-    "id": "ferrari",
-    "name": "Scuderia Ferrari",
-    "powerUnit": "Ferrari",
-    "livery": "/liveries/ferrari.png",
-    "drivers": ["charles-leclerc"],
-    "points": 340
-  }
+  {"id": "red-bull", "name": "Oracle Red Bull Racing", "powerUnit": "Honda RBPT", "livery": "/liveries/red-bull.png", "drivers": ["max-verstappen", "sergio-perez"], "points": 423},
+  {"id": "mclaren", "name": "McLaren Formula 1 Team", "powerUnit": "Mercedes", "livery": "/liveries/mclaren.png", "drivers": ["lando-norris", "oscar-piastri"], "points": 356},
+  {"id": "ferrari", "name": "Scuderia Ferrari", "powerUnit": "Ferrari", "livery": "/liveries/ferrari.png", "drivers": ["charles-leclerc", "carlos-sainz"], "points": 340},
+  {"id": "mercedes", "name": "Mercedes-AMG PETRONAS F1 Team", "powerUnit": "Mercedes", "livery": "/liveries/placeholder-team.svg", "drivers": ["lewis-hamilton", "george-russell"], "points": 243},
+  {"id": "aston-martin", "name": "Aston Martin Aramco F1 Team", "powerUnit": "Mercedes", "livery": "/liveries/placeholder-team.svg", "drivers": ["fernando-alonso", "lance-stroll"], "points": 136},
+  {"id": "rb", "name": "Visa Cash App RB F1 Team", "powerUnit": "Honda RBPT", "livery": "/liveries/placeholder-team.svg", "drivers": ["yuki-tsunoda", "daniel-ricciardo"], "points": 38},
+  {"id": "haas", "name": "MoneyGram Haas F1 Team", "powerUnit": "Ferrari", "livery": "/liveries/placeholder-team.svg", "drivers": ["nico-hulkenberg", "kevin-magnussen"], "points": 33},
+  {"id": "alpine", "name": "BWT Alpine F1 Team", "powerUnit": "Renault", "livery": "/liveries/placeholder-team.svg", "drivers": ["esteban-ocon", "pierre-gasly"], "points": 33},
+  {"id": "sauber", "name": "Stake F1 Team Kick Sauber", "powerUnit": "Ferrari", "livery": "/liveries/placeholder-team.svg", "drivers": ["valtteri-bottas", "guanyu-zhou"], "points": 11},
+  {"id": "williams", "name": "Williams Racing", "powerUnit": "Mercedes", "livery": "/liveries/placeholder-team.svg", "drivers": ["alexander-albon", "logan-sargeant"], "points": 5}
 ]

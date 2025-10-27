@@ -4,8 +4,19 @@ import Providers from "./providers";
 import PlausibleProvider from "next-plausible";
 import AnchorNav from "@/components/AnchorNav";
 
+const fallbackBaseUrl = "https://f1-analisis.vercel.app";
+const publicBaseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? fallbackBaseUrl;
+const metadataBase = (() => {
+  try {
+    return new URL(publicBaseUrl);
+  } catch {
+    return new URL(fallbackBaseUrl);
+  }
+})();
+const plausibleDomain = metadataBase.host;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://f1-analisis.vercel.app"),
+  metadataBase,
   title: {
     template: "%s · F1 Análisis",
     default: "F1 Análisis"
@@ -18,7 +29,7 @@ export const metadata: Metadata = {
       "Calendario, pilotos, clima y resultados de Fórmula 1 en una experiencia rápida, multidioma y PWA.",
     siteName: "F1 Análisis",
     type: "website",
-    url: "https://f1-analisis.vercel.app"
+    url: metadataBase.toString()
   },
   twitter: {
     card: "summary_large_image",
@@ -41,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body className="bg-slate-950 text-slate-100">
-        <PlausibleProvider domain="f1-analisis.vercel.app" taggedEvents>
+        <PlausibleProvider domain={plausibleDomain} taggedEvents>
           <Providers>
             <AnchorNav />
             {children}
