@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getSampleWeather } from "@/lib/data";
+import { getGrandPrixByRound, getSampleWeather } from "@/lib/data";
 
 export const runtime = "edge";
 
@@ -13,15 +13,19 @@ async function fetchWeatherFromOpenWeather(round?: string) {
     return null;
   }
 
-  const circuitId = round === "15" ? "zandvoort" : "monza";
-  const coords: Record<string, { lat: number; lon: number }> = {
-    zandvoort: { lat: 52.3883, lon: 4.5409 },
-    monza: { lat: 45.6156, lon: 9.2811 }
-  };
-  const geo = coords[circuitId];
+  const roundNumber = Number.parseInt(round, 10);
+  if (Number.isNaN(roundNumber)) {
+    return null;
+  }
+
+  const grandPrix = getGrandPrixByRound(roundNumber);
+  const geo = grandPrix?.circuit.geo;
   if (!geo) {
     return null;
   }
+
+  const sessions = grandPrix.sessions.filter((session) => session.type !== "FP2" && session.type !== "FP3");
+  const forecastSessions = sessions.length ? sessions.slice(0, 3) : grandPrix.sessions.slice(0, 3);
 
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/forecast?lat=${geo.lat}&lon=${geo.lon}&appid=${apiKey}&units=metric&lang=es`,
@@ -42,10 +46,10 @@ async function fetchWeatherFromOpenWeather(round?: string) {
       wind: Math.round(now.wind.speed),
       humidity: now.main.humidity
     },
-    forecast: ["FP1", "QUALY", "RACE"].map((session, index) => {
+    forecast: forecastSessions.map((session, index) => {
       const item = data.list[index * 8] ?? now;
       return {
-        session,
+        session: session.type,
         temperature: Math.round(item.main.temp),
         chanceOfRain: Math.round((item.pop ?? 0) * 100)
       };

@@ -1,32 +1,22 @@
 [
-  {
-    "id": "max-verstappen",
-    "code": "VER",
-    "name": "Max Verstappen",
-    "number": 1,
-    "country": "Netherlands",
-    "teamId": "red-bull",
-    "points": 255,
-    "photo": "/liveries/red-bull-max.png"
-  },
-  {
-    "id": "lando-norris",
-    "code": "NOR",
-    "name": "Lando Norris",
-    "number": 4,
-    "country": "United Kingdom",
-    "teamId": "mclaren",
-    "points": 212,
-    "photo": "/liveries/mclaren-norris.png"
-  },
-  {
-    "id": "charles-leclerc",
-    "code": "LEC",
-    "name": "Charles Leclerc",
-    "number": 16,
-    "country": "Monaco",
-    "teamId": "ferrari",
-    "points": 189,
-    "photo": "/liveries/ferrari-leclerc.png"
-  }
+  {"id": "max-verstappen", "code": "VER", "name": "Max Verstappen", "number": 1, "country": "Netherlands", "teamId": "red-bull", "points": 255, "photo": "/liveries/red-bull-max.png"},
+  {"id": "lando-norris", "code": "NOR", "name": "Lando Norris", "number": 4, "country": "United Kingdom", "teamId": "mclaren", "points": 212, "photo": "/liveries/mclaren-norris.png"},
+  {"id": "charles-leclerc", "code": "LEC", "name": "Charles Leclerc", "number": 16, "country": "Monaco", "teamId": "ferrari", "points": 189, "photo": "/liveries/ferrari-leclerc.png"},
+  {"id": "carlos-sainz", "code": "SAI", "name": "Carlos Sainz", "number": 55, "country": "Spain", "teamId": "ferrari", "points": 176, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "oscar-piastri", "code": "PIA", "name": "Oscar Piastri", "number": 81, "country": "Australia", "teamId": "mclaren", "points": 171, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "lewis-hamilton", "code": "HAM", "name": "Lewis Hamilton", "number": 44, "country": "United Kingdom", "teamId": "mercedes", "points": 125, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "george-russell", "code": "RUS", "name": "George Russell", "number": 63, "country": "United Kingdom", "teamId": "mercedes", "points": 118, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "sergio-perez", "code": "PER", "name": "Sergio Pérez", "number": 11, "country": "Mexico", "teamId": "red-bull", "points": 111, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "fernando-alonso", "code": "ALO", "name": "Fernando Alonso", "number": 14, "country": "Spain", "teamId": "aston-martin", "points": 96, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "lance-stroll", "code": "STR", "name": "Lance Stroll", "number": 18, "country": "Canada", "teamId": "aston-martin", "points": 40, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "nico-hulkenberg", "code": "HUL", "name": "Nico Hülkenberg", "number": 27, "country": "Germany", "teamId": "haas", "points": 27, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "yuki-tsunoda", "code": "TSU", "name": "Yuki Tsunoda", "number": 22, "country": "Japan", "teamId": "rb", "points": 26, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "esteban-ocon", "code": "OCO", "name": "Esteban Ocon", "number": 31, "country": "France", "teamId": "alpine", "points": 18, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "pierre-gasly", "code": "GAS", "name": "Pierre Gasly", "number": 10, "country": "France", "teamId": "alpine", "points": 15, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "daniel-ricciardo", "code": "RIC", "name": "Daniel Ricciardo", "number": 3, "country": "Australia", "teamId": "rb", "points": 12, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "kevin-magnussen", "code": "MAG", "name": "Kevin Magnussen", "number": 20, "country": "Denmark", "teamId": "haas", "points": 6, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "guanyu-zhou", "code": "ZHO", "name": "Guanyu Zhou", "number": 24, "country": "China", "teamId": "sauber", "points": 6, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "valtteri-bottas", "code": "BOT", "name": "Valtteri Bottas", "number": 77, "country": "Finland", "teamId": "sauber", "points": 5, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "alexander-albon", "code": "ALB", "name": "Alexander Albon", "number": 23, "country": "Thailand", "teamId": "williams", "points": 4, "photo": "/liveries/placeholder-driver.svg"},
+  {"id": "logan-sargeant", "code": "SAR", "name": "Logan Sargeant", "number": 2, "country": "United States", "teamId": "williams", "points": 1, "photo": "/liveries/placeholder-driver.svg"}
 ]

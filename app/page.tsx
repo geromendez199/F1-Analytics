@@ -9,11 +9,13 @@ import Flags from "./(sections)/Flags";
 import Weather from "./(sections)/Weather";
 import Results from "./(sections)/Results";
 import About from "./(sections)/About";
+import { resolveLocale } from "@/lib/i18n";
 
-export default function HomePage() {
+export default function HomePage({ searchParams }: { searchParams?: { lang?: string } }) {
+  const locale = resolveLocale(searchParams?.lang);
   return (
     <main>
-      <Hero />
+      <Hero locale={locale} />
       <Live />
       <Calendar />
       <Drivers />
