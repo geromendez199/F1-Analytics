@@ -3,9 +3,9 @@ import {
   fetchDrivers,
   fetchTeams,
   fetchSeasonSchedule,
-  getGrandPrixByRound as apiGetGrandPrixByRound,
-  getNextGrandPrix as apiGetNextGrandPrix,
-  getSchedule as apiGetSchedule,
+  getGrandPrixByRound as fetchGrandPrixByRound,
+  getNextGrandPrix as fetchNextGrandPrix,
+  getSchedule as fetchSchedule,
   getTeamsWithDrivers,
   getWeatherByCircuit
 } from "./api";
@@ -29,15 +29,15 @@ export async function getTeamsAndDrivers(season: string | number = "current"): P
 }
 
 export async function getSchedule(season?: number): Promise<GrandPrix[]> {
-  return apiGetSchedule(season ?? getDefaultSeasonYear());
+  return fetchSchedule(season ?? getDefaultSeasonYear());
 }
 
 export async function getGrandPrixByRound(round: number, season?: number): Promise<GrandPrix | undefined> {
-  return apiGetGrandPrixByRound(round, season ?? getDefaultSeasonYear());
+  return fetchGrandPrixByRound(round, season ?? getDefaultSeasonYear());
 }
 
 export async function getNextGrandPrix(reference?: Temporal.Instant, season?: number): Promise<GrandPrix | undefined> {
-  return apiGetNextGrandPrix(reference, season ?? getDefaultSeasonYear());
+  return fetchNextGrandPrix(reference, season ?? getDefaultSeasonYear());
 }
 
 export async function getWeatherForGrandPrix(

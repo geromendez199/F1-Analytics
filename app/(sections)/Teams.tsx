@@ -35,7 +35,7 @@ function TeamCard({ team, driverMap, liveryAlt, pointsLabel, driversLabel }: Tea
         <div>
           <dt className="text-xs uppercase tracking-widest text-slate-500">{driversLabel}</dt>
           <dd className="mt-1 flex flex-wrap gap-2">
-            {team.drivers.map((driverId) => {
+            {team.drivers.map((driverId: string) => {
               const driver = driverMap.get(driverId);
               return (
                 <span key={driverId} className="rounded-full border border-slate-700 px-2 py-1 text-xs text-slate-200">
@@ -53,7 +53,7 @@ function TeamCard({ team, driverMap, liveryAlt, pointsLabel, driversLabel }: Tea
 export default async function Teams({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
   const [teams, drivers] = await Promise.all([getTeamsAndDrivers(), getDrivers()]);
-  const driverMap = new Map(drivers.map((driver) => [driver.id, driver]));
+  const driverMap = new Map<string, Driver>(drivers.map((driver: Driver) => [driver.id, driver]));
 
   return (
     <section id="escuderias" aria-labelledby="teams-title" className="container mx-auto px-6">
@@ -65,7 +65,7 @@ export default async function Teams({ locale }: { locale: Locale }) {
         <span className="text-xs uppercase tracking-widest text-slate-500">{dictionary.teams.updatedAt}</span>
       </header>
       <div className="grid gap-6 md:grid-cols-3">
-        {teams.map((team) => (
+        {teams.map((team: Team) => (
           <TeamCard
             key={team.id}
             team={team}

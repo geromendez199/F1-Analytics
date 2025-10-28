@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import QuickSearch, { QuickSearchItem } from "@/components/QuickSearch";
+import QuickSearch, { type QuickSearchItem } from "@/components/QuickSearch";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import {
   getDefaultSeasonYear,
@@ -10,13 +10,13 @@ import {
   getTeamsAndDrivers
 } from "@/lib/data";
 import { countdown, formatDateTime, toUserZonedDateTime } from "@/lib/time";
-import type { Driver, GrandPrix, Team } from "@/lib/types";
+import type { Driver, GrandPrix, Session, Team } from "@/lib/types";
 
 function getNextSession(next: GrandPrix | undefined, liveLabel: string, locale: Locale) {
   if (!next) {
     return null;
   }
-  const race = next.sessions.find((session) => session.type === "RACE") ?? next.sessions[0];
+  const race = next.sessions.find((session: Session) => session.type === "RACE") ?? next.sessions[0];
   const start = toUserZonedDateTime(race.start, next.circuit.tz);
   return {
     grandPrix: next.grandPrix,
@@ -28,8 +28,8 @@ function getNextSession(next: GrandPrix | undefined, liveLabel: string, locale: 
 }
 
 function buildSearchItems(drivers: Driver[], teams: Team[], schedule: GrandPrix[]): QuickSearchItem[] {
-  const teamsMap = new Map(teams.map((team) => [team.id, team]));
-  const driverItems = drivers.map((driver) => {
+  const teamsMap = new Map<string, Team>(teams.map((team: Team) => [team.id, team]));
+  const driverItems = drivers.map((driver: Driver) => {
     const team = teamsMap.get(driver.teamId);
     return {
       id: driver.id,
@@ -40,7 +40,7 @@ function buildSearchItems(drivers: Driver[], teams: Team[], schedule: GrandPrix[
     };
   });
 
-  const teamItems = teams.map((team) => ({
+  const teamItems = teams.map((team: Team) => ({
     id: team.id,
     type: "team" as const,
     label: team.name,

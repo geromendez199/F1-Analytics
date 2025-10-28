@@ -6,6 +6,11 @@ import {
 } from "@/lib/api";
 import { getDefaultSeasonYear } from "@/lib/data";
 
+type DriverStandingEntry = Awaited<ReturnType<typeof fetchDriverStandings>>[number];
+type ConstructorStandingEntry = Awaited<ReturnType<typeof fetchConstructorStandings>>[number];
+type LastRaceResult = NonNullable<Awaited<ReturnType<typeof getLastRaceResult>>>;
+type PodiumEntry = LastRaceResult["podium"][number];
+
 export default async function Results({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
   const season = getDefaultSeasonYear();
@@ -35,13 +40,13 @@ export default async function Results({ locale }: { locale: Locale }) {
     );
   }
 
-  const driverStandings = driverStandingsRaw.map((standing) => ({
+  const driverStandings = driverStandingsRaw.map((standing: DriverStandingEntry) => ({
     position: Number.parseInt(standing.position, 10),
     driverName: `${standing.Driver.givenName} ${standing.Driver.familyName}`,
     points: Number.parseFloat(standing.points ?? "0")
   }));
 
-  const constructorStandings = constructorStandingsRaw.map((standing) => ({
+  const constructorStandings = constructorStandingsRaw.map((standing: ConstructorStandingEntry) => ({
     position: Number.parseInt(standing.position, 10),
     constructorName: standing.Constructor.name,
     points: Number.parseFloat(standing.points ?? "0")
@@ -66,7 +71,7 @@ export default async function Results({ locale }: { locale: Locale }) {
             <p className="text-sm text-slate-400">{new Date(lastRace.date).toLocaleDateString(locale)}</p>
           </header>
           <ol className="space-y-3 text-sm text-slate-200">
-            {lastRace.podium.map((entry) => (
+            {lastRace.podium.map((entry: PodiumEntry) => (
               <li key={entry.position} className="flex items-center justify-between">
                 <span className="flex items-center gap-2">
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-800 text-sm font-semibold text-white">
