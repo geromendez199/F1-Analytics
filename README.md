@@ -27,12 +27,15 @@ ina/Cordoba).
 
 Este proyecto no está afiliado a F1/FIA. Todas las fuentes son terceros y pueden cambiar.
 
-        •       Calendario y resultados históricos: API pública histórica (p.ej., Ergast—limitada a 2023) u otros proveedores eq
-uivalentes.
-        •       Clima por circuito: OpenWeatherMap / Tomorrow.io (pronóstico y “ahora”).
-        •       Estado en vivo (opcional): proveedor “live timing” no oficial (REST/WebSocket) si está disponible legalmente.
-        •       Neumáticos y compuestos: endpoints/feeds públicos o scrapers de notas de Pirelli (siempre respetando términos).
-        •       Metadatos (pilotos/escuderías/autos): dataset estático versionado en /data + enriquecimiento vía API si procede.
+        •       Resultados oficiales, standings, pilotos y constructores: Ergast Developer API (`/f1/current/*`).
+        •       Live timing y telemetría: servicio FastF1 (Python) expuesto vía `FASTF1_SERVICE_URL`.
+        •       Clima en tiempo real: OpenWeatherMap (`/data/2.5/forecast` + `/weather`).
+        •       Estado de pista/banderas: Formula 1 Live API en RapidAPI (`/events/live`).
+        •       Noticias: NewsAPI (`/v2/everything?q=Formula%201`).
+        •       Imágenes de pilotos/equipos: Wikipedia Commons API (`pageimages`).
+        •       Conversión horaria: TimeZoneDB (`/v2.1/get-time-zone`).
+        •       Video highlights: YouTube Data API v3 (`/search`).
+        •       Metadatos adicionales: dataset estático versionado en /data para fallback offline.
 
 El README asume clima y calendario garantizados; “live timing” queda opcional y detrás de una bandera de features.
 
@@ -42,7 +45,7 @@ El README asume clima y calendario garantizados; “live timing” queda opciona
 
 Secciones ancladas (/#section), navegación sticky y scroll suave:
         1.      Hero — Búsqueda rápida, próxima carrera con hora local, clima y cuenta regresiva.
-        2.      En Vivo (si disponible) — Tiempos, intervalos, gomas, banderas, incidentes (auto-refresco / WebSocket).
+        2.      En Vivo — Tiempos, intervalos, gomas, banderas, incidentes (auto-refresco / WebSocket).
         3.      Calendario — Fechas de GP con conversión de zona horaria del usuario, sesiones (FP1–FP3, Sprint, Qualy, Race).
         4.      Pilotos — Fichas con foto, número, nacionalidad, puntos y comparativas intra-equipo.
         5.      Escuderías — Livery, pilotos, posiciones, puntos, evolución.
@@ -50,8 +53,11 @@ Secciones ancladas (/#section), navegación sticky y scroll suave:
         7.      Cubiertas — C0–C5, uso por stint, selección Pirelli por GP.
         8.      Banderas — Significado (verde, amarilla, roja, SC, VSC, azul, blanca, etc.) con iconografía clara.
         9.      Clima — Pronóstico por sesión (temp/lluvia/viento), ahora en el circuito.
-        10.     Resultados — Última carrera y topline de temporadas previas.
-        11.     Acerca — Fuentes, licencia, disclaimer.
+        10.     Resultados — Última carrera y standings generados en vivo desde Ergast.
+        11.     Noticias — Titulares recientes consumidos desde NewsAPI.
+        12.     Multimedia — Highlights oficiales vía YouTube Data API.
+        13.     Telemetría — Comparativas FastF1 (laps, DRS, velocidad).
+        14.     Acerca — Fuentes, licencia, disclaimer.
 
 ⸻
 
@@ -59,10 +65,17 @@ Secciones ancladas (/#section), navegación sticky y scroll suave:
         •       Front (OnePage): RSC para “calendario/pilotos/escuderías” (cacheables) + TanStack Query para “en vivo” (refetch/
 WS).
         •       APIs internas (/app/api/*):
-        •       /api/schedule — calendario normalizado.
+        •       /api/schedule — calendario normalizado (fallback estático).
+        •       /api/circuits — detalle de circuitos + timezone desde Ergast/TimeZoneDB.
         •       /api/weather?gp=<round> — pronóstico por circuito + “ahora”.
-        •       /api/standings — pilotos/constructores.
-        •       /api/live — proxy/WS a proveedor live (opcional).
+        •       /api/standings — pilotos/constructores desde Ergast.
+        •       /api/live — proxy FastF1/Live API.
+        •       /api/race-status — banderas en vivo vía RapidAPI.
+        •       /api/telemetry — métricas FastF1 normalizadas.
+        •       /api/news — titulares NewsAPI.
+        •       /api/videos — highlights YouTube Data API.
+        •       /api/images — imágenes Wikipedia Commons.
+        •       /api/timezone — helper de TZ para otros servicios.
         •       Cache: Cache-Control, revalidación ISR y KV opcional.
         •       TZ/Fechas: Temporal.ZonedDateTime con la TZ del usuario; fallback a America/Argentina/Cordoba.
         •       Accesibilidad: roles/labels, contraste AA+, navegación por teclado.
@@ -77,9 +90,26 @@ Crear .env.local:
 # Clima
 OPENWEATHER_API_KEY=xxxx
 
-# Proveedor live timing (opcional; no oficial)
-LIVE_API_URL=
+# Ergast (opcional)
+ERGAST_API_URL=https://ergast.com/api/f1
+
+# Live timing y telemetría
+FASTF1_SERVICE_URL= # URL del backend FastF1 (REST)
+LIVE_API_URL=       # compatibilidad con proxy existente
 LIVE_API_TOKEN=
+
+# Estado de pista (RapidAPI)
+F1_LIVE_API_URL=https://api-formula-1.p.rapidapi.com
+F1_LIVE_API_ENDPOINT=/events/live
+F1_LIVE_API_KEY=
+F1_LIVE_API_HOST=api-formula-1.p.rapidapi.com
+
+# Noticias y multimedia
+NEWS_API_KEY=
+YOUTUBE_API_KEY=
+
+# Timezone helper
+TIMEZONEDB_API_KEY=
 
 # Cache opcional
 SUPABASE_URL=
@@ -99,9 +129,16 @@ f1-analisis/
 │  ├─ page.tsx                 # OnePage (secciones ancladas)
 │  ├─ api/
 │  │  ├─ schedule/route.ts     # calendario normalizado
+│  │  ├─ circuits/route.ts     # circuitos + timezone dinámico
 │  │  ├─ weather/route.ts      # clima por GP
-│  │  ├─ standings/route.ts    # pilotos/constructores
-│  │  └─ live/route.ts         # proxy live (opcional)
+│  │  ├─ standings/route.ts    # pilotos/constructores (Ergast)
+│  │  ├─ live/route.ts         # proxy FastF1/Live API
+│  │  ├─ race-status/route.ts  # banderas en vivo (RapidAPI)
+│  │  ├─ telemetry/route.ts    # telemetría FastF1
+│  │  ├─ news/route.ts         # titulares NewsAPI
+│  │  ├─ videos/route.ts       # highlights YouTube
+│  │  ├─ images/route.ts       # imágenes Wikipedia
+│  │  └─ timezone/route.ts     # helper TZ (TimeZoneDB)
 │  └─ (sections)/
 │     ├─ Hero.tsx
 │     ├─ Live.tsx
@@ -112,7 +149,10 @@ f1-analisis/
 │     ├─ Tyres.tsx
 │     ├─ Flags.tsx
 │     ├─ Weather.tsx
-│     └─ Results.tsx
+│     ├─ Results.tsx
+│     ├─ News.tsx
+│     ├─ Highlights.tsx
+│     └─ Telemetry.tsx
 ├─ components/
 │  └─ AnchorNav.tsx            # navegación sticky con anclas
 ├─ data/                       # datasets estáticos (pilotos, teams, circuitos)
@@ -179,10 +219,10 @@ pnpm build && pnpm start
 Notas de implementación actual
 ------------------------------
 - La SPA ya incluye todas las secciones definidas con datos mock y componentes accesibles.
-- Las rutas /api utilizan runtime edge y devuelven datos estáticos o consultan OpenWeather cuando OPENWEATHER_API_KEY está confi
-gurada.
+- Las rutas /api utilizan runtime edge y consultan Ergast, OpenWeather, RapidAPI, NewsAPI, YouTube y TimeZoneDB con fallback estático.
 - La navegación sticky con anclas permite saltar a cada bloque, cumpliendo con el flujo “OnePage”.
-- La sección En Vivo se alimenta de /api/live con TanStack Query y muestra un placeholder hasta conectar un proveedor real.
+- La sección En Vivo se alimenta de /api/live (FastF1) y /api/race-status para banderas, mostrando fallback descriptivo si faltan credenciales.
+- Resultados y standings provienen de Ergast en tiempo real con fallback local.
 - Los helpers de Temporal convierten horarios a la zona del usuario (fallback Córdoba) para countdown y calendario.
 
 ⸻
@@ -205,8 +245,7 @@ gurada.
 ⸻
 
 🧷 Accesos rápidos (secciones)
-        •       /#hero · /#live · /#calendario · /#pilotos · /#escuderias · /#autos · /#cubiertas · /#banderas · /#clima · /#res
-ultados · /#acerca
+        •       /#hero · /#live · /#calendario · /#pilotos · /#escuderias · /#autos · /#cubiertas · /#banderas · /#clima · /#resultados · /#noticias · /#multimedia · /#telemetria · /#acerca
 
 # F1-Analytics: Integración de APIs de Fórmula 1  
 Repositorio del proyecto **F1-Analytics** (dashboard, análisis y visualización) con los principales puntos de entrada de datos (APIs) para la categoría Formula One World Championship.
