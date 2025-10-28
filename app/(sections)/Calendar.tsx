@@ -1,6 +1,7 @@
 import { getDefaultSeasonYear, getSchedule } from "@/lib/data";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import { formatDateTime, toUserZonedDateTime } from "@/lib/time";
+import type { GrandPrix, Session } from "@/lib/types";
 
 export default async function Calendar({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
@@ -13,7 +14,7 @@ export default async function Calendar({ locale }: { locale: Locale }) {
         <p className="text-sm text-slate-400">{dictionary.calendar.subtitle}</p>
       </div>
       <div className="grid gap-6 md:grid-cols-2">
-        {schedule.map((gp) => (
+        {schedule.map((gp: GrandPrix) => (
           <article
             key={gp.round}
             className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg"
@@ -31,7 +32,7 @@ export default async function Calendar({ locale }: { locale: Locale }) {
               </span>
             </header>
             <dl className="space-y-2 text-sm">
-              {gp.sessions.map((session) => {
+              {gp.sessions.map((session: Session) => {
                 const start = toUserZonedDateTime(session.start, gp.circuit.tz);
                 return (
                   <div key={session.type} className="flex items-center justify-between rounded-lg bg-slate-900/70 px-3 py-2">

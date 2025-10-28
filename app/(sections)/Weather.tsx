@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { getDefaultSeasonYear, getNextGrandPrix, getWeatherForGrandPrix } from "@/lib/data";
 import { getDictionary, type Dictionary, type Locale } from "@/lib/i18n";
-import type { WeatherData } from "@/lib/types";
+import type { Session, WeatherData } from "@/lib/types";
 
 async function WeatherContent({ locale, dictionary }: { locale: Locale; dictionary: Dictionary }) {
   const season = getDefaultSeasonYear();
@@ -16,17 +16,16 @@ async function WeatherContent({ locale, dictionary }: { locale: Locale; dictiona
   }
 
   const { weather, live } = await getWeatherForGrandPrix(grandPrix, locale);
-  const baseForecast = weather.forecast.length
-    ? weather.forecast
-    : grandPrix.sessions
-        .filter((session) => ["QUALY", "SPRINT", "RACE"].includes(session.type))
-        .map((session) => ({
-          session: session.type,
-          temperature: weather.now.temperature,
-          chanceOfRain: live ? 0 : 15
-        }));
+  const fallbackForecast = grandPrix.sessions
+    .filter((session: Session) => ["QUALY", "SPRINT", "RACE"].includes(session.type))
+    .map((session: Session): WeatherData["forecast"][number] => ({
+      session: session.type,
+      temperature: weather.now.temperature,
+      chanceOfRain: live ? 0 : 15
+    }));
+  const forecast = weather.forecast.length ? weather.forecast : fallbackForecast;
 
-  if (!baseForecast.length) {
+  if (!forecast.length) {
     return (
       <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-300">
         {dictionary.weather.unavailable}
@@ -70,7 +69,7 @@ async function WeatherContent({ locale, dictionary }: { locale: Locale; dictiona
           </p>
         </header>
         <ul className="space-y-3 text-sm text-slate-200">
-          {baseForecast.map((item) => (
+          {forecast.map((item: WeatherData["forecast"][number]) => (
             <li key={item.session} className="flex items-center justify-between">
               <span className="font-medium">{sessionLabel(item.session)}</span>
               <span className="text-slate-300">
@@ -96,7 +95,6 @@ export default function Weather({ locale }: { locale: Locale }) {
         <span className="text-xs uppercase tracking-widest text-slate-500">{dictionary.weather.source}</span>
       </header>
       <Suspense fallback={<p className="text-sm text-slate-400">{dictionary.weather.loading}</p>}>
-        {/* @ts-expect-error Async Server Component */}
         <WeatherContent locale={locale} dictionary={dictionary} />
       </Suspense>
     </section>

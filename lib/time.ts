@@ -14,16 +14,10 @@ export function toUserZonedDateTime(
   userTimeZone?: string
 ) {
   try {
-    const zoned = Temporal.ZonedDateTime.from({
-      timeZone: circuitTimeZone,
-      plainDateTime: Temporal.PlainDateTime.from(isoString)
-    });
+    const zoned = Temporal.ZonedDateTime.from(`${isoString}[${circuitTimeZone}]`);
     return zoned.withTimeZone(userTimeZone ?? getUserTimeZone());
   } catch (error) {
-    const fallback = Temporal.ZonedDateTime.from({
-      timeZone: "UTC",
-      plainDateTime: Temporal.PlainDateTime.from(isoString)
-    });
+    const fallback = Temporal.ZonedDateTime.from(`${isoString}[UTC]`);
     return fallback.withTimeZone(userTimeZone ?? getUserTimeZone());
   }
 }
@@ -41,7 +35,7 @@ export function formatDateTime(zdt: Temporal.ZonedDateTime, locale?: string) {
 export function countdown(
   target: Temporal.ZonedDateTime,
   liveLabel = "En vivo",
-  now: Temporal.ZonedDateTime = Temporal.Now.zonedDateTimeISO(target.timeZone)
+  now: Temporal.ZonedDateTime = Temporal.Now.zonedDateTimeISO(target.timeZoneId)
 ) {
   if (Temporal.ZonedDateTime.compare(now, target) >= 0) {
     return liveLabel;

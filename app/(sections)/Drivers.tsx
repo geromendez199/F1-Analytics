@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { getDrivers, getTeamsAndDrivers } from "@/lib/data";
 import { getDictionary, type Locale } from "@/lib/i18n";
+import type { Driver, Team } from "@/lib/types";
 
 export default async function Drivers({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
   const [drivers, teams] = await Promise.all([getDrivers(), getTeamsAndDrivers()]);
-  const teamsMap = new Map(teams.map((team) => [team.id, team]));
+  const teamsMap = new Map<string, Team>(teams.map((team: Team) => [team.id, team]));
 
   return (
     <section id="pilotos" aria-labelledby="drivers-title" className="container mx-auto px-6">
@@ -17,7 +18,7 @@ export default async function Drivers({ locale }: { locale: Locale }) {
         <span className="text-xs uppercase tracking-widest text-slate-500">{dictionary.drivers.updatedAt}</span>
       </header>
       <div className="grid gap-6 md:grid-cols-3">
-        {drivers.map((driver) => {
+        {drivers.map((driver: Driver) => {
           const team = teamsMap.get(driver.teamId);
           const photoAlt = dictionary.drivers.photoAlt.replace("{name}", driver.name);
           return (

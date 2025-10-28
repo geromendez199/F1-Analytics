@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { getDefaultSeasonYear } from "@/lib/data";
-import { fetchConstructorStandings, fetchDriverStandings } from "@/lib/api";
+import { getDefaultSeasonYear, getDrivers, getTeams } from "@/lib/data";
+import type { Driver, Team } from "@/lib/types";
 
 export const runtime = "edge";
 export const revalidate = 15 * 60;
@@ -8,23 +8,37 @@ export const revalidate = 15 * 60;
 export async function GET() {
   const season = getDefaultSeasonYear();
   try {
-    const [driverStandings, constructorStandings] = await Promise.all([
-      fetchDriverStandings(season),
-      fetchConstructorStandings(season)
-    ]);
+    const [driversRaw, teamsRaw] = await Promise.all([getDrivers(season), getTeams(season)]);
 
-    const drivers = driverStandings.map((standing) => ({
-      id: standing.Driver.driverId,
-      name: `${standing.Driver.givenName} ${standing.Driver.familyName}`,
-      points: Number.parseFloat(standing.points ?? "0"),
-      teamId: standing.Constructors[0]?.constructorId ?? "unknown"
-    }));
+    interface DriverStanding {
+      id: string;
+      name: string;
+      points: number;
+      teamId: string;
+    }
 
-    const teams = constructorStandings.map((standing) => ({
-      id: standing.Constructor.constructorId,
-      name: standing.Constructor.name,
-      points: Number.parseFloat(standing.points ?? "0")
-    }));
+    interface TeamStanding {
+      id: string;
+      name: string;
+      points: number;
+    }
+
+    const drivers = driversRaw
+      .map((driver: Driver): DriverStanding => ({
+        id: driver.id,
+        name: driver.name,
+        points: driver.points,
+        teamId: driver.teamId
+      }))
+      .sort((a: DriverStanding, b: DriverStanding) => b.points - a.points);
+
+    const teams = teamsRaw
+      .map((team: Team): TeamStanding => ({
+        id: team.id,
+        name: team.name,
+        points: team.points
+      }))
+      .sort((a: TeamStanding, b: TeamStanding) => b.points - a.points);
 
     return NextResponse.json({ season, drivers, teams });
   } catch (error) {
