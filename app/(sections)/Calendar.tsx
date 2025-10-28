@@ -1,4 +1,4 @@
-import { getSchedule } from "@/lib/data";
+import { getSchedue } from "@/lib/data";
 import { getDictionary, type Locale } from "@/lib/i18n";
 import { formatDateTime, toUserZonedDateTime } from "@/lib/time";
 
@@ -32,7 +32,8 @@ export default function Calendar({ locale }: { locale: Locale }) {
             <dl className="space-y-2 text-sm">
               {gp.sessions.map((session) => {
                 const start = toUserZonedDateTime(session.start, gp.circuit.tz);
-                return (
+ 
+            return (
                   <div key={session.type} className="flex items-center justify-between rounded-lg bg-slate-900/70 px-3 py-2">
                     <dt className="font-medium text-slate-200">
                       {dictionary.common.sessionTypes[session.type] ?? session.type}
