@@ -1,22 +1,35 @@
 import { Temporal } from "@js-temporal/polyfill";
 
-const DEFAULT_TZ = "America/Argentina/Cordoba";
+function getUserTimeZone() {
+  try {
+    return Temporal.Now.timeZoneId();
+  } catch (error) {
+    return "UTC";
+  }
+}
 
 export function toUserZonedDateTime(
   isoString: string,
   circuitTimeZone: string,
   userTimeZone?: string
 ) {
-  const zoned = Temporal.ZonedDateTime.from({
-    timeZone: circuitTimeZone,
-    plainDateTime: Temporal.PlainDateTime.from(isoString)
-  });
-
-  return zoned.withTimeZone(userTimeZone ?? DEFAULT_TZ);
+  try {
+    const zoned = Temporal.ZonedDateTime.from({
+      timeZone: circuitTimeZone,
+      plainDateTime: Temporal.PlainDateTime.from(isoString)
+    });
+    return zoned.withTimeZone(userTimeZone ?? getUserTimeZone());
+  } catch (error) {
+    const fallback = Temporal.ZonedDateTime.from({
+      timeZone: "UTC",
+      plainDateTime: Temporal.PlainDateTime.from(isoString)
+    });
+    return fallback.withTimeZone(userTimeZone ?? getUserTimeZone());
+  }
 }
 
-export function formatDateTime(zdt: Temporal.ZonedDateTime) {
-  return zdt.toLocaleString(undefined, {
+export function formatDateTime(zdt: Temporal.ZonedDateTime, locale?: string) {
+  return zdt.toLocaleString(locale, {
     weekday: "short",
     month: "short",
     day: "2-digit",
@@ -25,10 +38,13 @@ export function formatDateTime(zdt: Temporal.ZonedDateTime) {
   });
 }
 
-export function countdown(target: Temporal.ZonedDateTime) {
-  const now = Temporal.Now.zonedDateTimeISO(target.timeZone);
+export function countdown(
+  target: Temporal.ZonedDateTime,
+  liveLabel = "En vivo",
+  now: Temporal.ZonedDateTime = Temporal.Now.zonedDateTimeISO(target.timeZone)
+) {
   if (Temporal.ZonedDateTime.compare(now, target) >= 0) {
-    return "En vivo";
+    return liveLabel;
   }
   const diff = target.since(now, { largestUnit: "day" });
   const days = Math.max(diff.days, 0);

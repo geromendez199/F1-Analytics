@@ -7,8 +7,7 @@ const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
-    "./lib/**/*.{ts,tsx}",
-    "./data/**/*.{ts,tsx,mdx}"
+    "./lib/**/*.{ts,tsx}"
   ],
   darkMode: "class",
   theme: {

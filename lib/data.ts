@@ -1,26 +1,52 @@
-import drivers from "../data/drivers.json" assert { type: "json" };
-import teams from "../data/teams.json" assert { type: "json" };
-import schedule from "../data/schedule.json" assert { type: "json" };
-import results from "../data/results.json" assert { type: "json" };
-import weatherSample from "../data/weather-sample.json" assert { type: "json" };
-import type { Driver, GrandPrix, ResultData, Team, WeatherData } from "./types";
+import { Temporal } from "@js-temporal/polyfill";
+import {
+  fetchDrivers,
+  fetchTeams,
+  fetchSeasonSchedule,
+  getGrandPrixByRound as apiGetGrandPrixByRound,
+  getNextGrandPrix as apiGetNextGrandPrix,
+  getSchedule as apiGetSchedule,
+  getTeamsWithDrivers,
+  getWeatherByCircuit
+} from "./api";
+import type { Driver, GrandPrix, Team, WeatherData } from "./types";
 
-export function getDrivers(): Driver[] {
-  return drivers as Driver[];
+export function getDefaultSeasonYear(): number {
+  const current = Temporal.Now.plainDateISO().year;
+  return Math.max(current, 2025);
 }
 
-export function getTeams(): Team[] {
-  return teams as Team[];
+export async function getDrivers(season: string | number = "current"): Promise<Driver[]> {
+  return fetchDrivers(season);
 }
 
-export function getSchedule(): GrandPrix[] {
-  return schedule as GrandPrix[];
+export async function getTeams(season: string | number = "current"): Promise<Team[]> {
+  return fetchTeams(season);
 }
 
-export function getResults(): ResultData {
-  return results as ResultData;
+export async function getTeamsAndDrivers(season: string | number = "current"): Promise<Team[]> {
+  return getTeamsWithDrivers(season);
 }
 
-export function getSampleWeather(): WeatherData {
-  return weatherSample as WeatherData;
+export async function getSchedule(season?: number): Promise<GrandPrix[]> {
+  return apiGetSchedule(season ?? getDefaultSeasonYear());
+}
+
+export async function getGrandPrixByRound(round: number, season?: number): Promise<GrandPrix | undefined> {
+  return apiGetGrandPrixByRound(round, season ?? getDefaultSeasonYear());
+}
+
+export async function getNextGrandPrix(reference?: Temporal.Instant, season?: number): Promise<GrandPrix | undefined> {
+  return apiGetNextGrandPrix(reference, season ?? getDefaultSeasonYear());
+}
+
+export async function getWeatherForGrandPrix(
+  grandPrix: GrandPrix,
+  locale: string
+): Promise<{ weather: WeatherData; live: boolean }> {
+  return getWeatherByCircuit(grandPrix.circuit, locale);
+}
+
+export async function getSeasonSchedule(season?: number) {
+  return fetchSeasonSchedule(season ?? getDefaultSeasonYear());
 }

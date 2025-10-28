@@ -1,40 +1,24 @@
 import { NextResponse } from "next/server";
+import { getLiveTiming } from "@/lib/api";
 
 export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
-const PLACEHOLDER = {
-  available: false,
-  message:
-    "Live timing deshabilitado. Configura LIVE_API_URL y LIVE_API_TOKEN para habilitar la transmisión oficial.",
-  updatedAt: new Date().toISOString(),
-  entries: [] as Array<{
-    position: number;
-    driver: string;
-    gap: string;
-    tyre: string;
-    lastLap: string;
-  }>
-};
-
 export async function GET() {
-  const url = process.env.LIVE_API_URL;
-  const token = process.env.LIVE_API_TOKEN;
+  const live = await getLiveTiming().catch(() => null);
 
-  if (!url || !token) {
-    return NextResponse.json(PLACEHOLDER, { headers: { "Cache-Control": "no-store" } });
+  if (!live) {
+    return NextResponse.json(
+      {
+        available: false,
+        message:
+          "Live timing deshabilitado. Configura OPENF1_SESSION_KEY (y RAPIDAPI_F1LIVE_KEY si corresponde) para habilitar la fuente.",
+        updatedAt: new Date().toISOString(),
+        entries: []
+      },
+      { headers: { "Cache-Control": "no-store" } }
+    );
   }
 
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  });
-
-  if (!response.ok) {
-    return NextResponse.json(PLACEHOLDER, { headers: { "Cache-Control": "no-store" } });
-  }
-
-  const liveData = await response.json();
-  return NextResponse.json({ available: true, ...liveData }, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json(live, { headers: { "Cache-Control": "no-store" } });
 }
