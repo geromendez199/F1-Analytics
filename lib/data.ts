@@ -1,3 +1,4 @@
+import { Temporal } from "@js-temporal/polyfill";
 import drivers from "../data/drivers.json" assert { type: "json" };
 import teams from "../data/teams.json" assert { type: "json" };
 import schedule from "../data/schedule.json" assert { type: "json" };
@@ -15,6 +16,25 @@ export function getTeams(): Team[] {
 
 export function getSchedule(): GrandPrix[] {
   return schedule as GrandPrix[];
+}
+
+export function getGrandPrixByRound(round: number): GrandPrix | undefined {
+  return getSchedule().find((gp) => gp.round === round);
+}
+
+export function getNextGrandPrix(reference?: Temporal.Instant): GrandPrix | undefined {
+  const instant = reference ?? Temporal.Now.instant();
+  return getSchedule().find((grandPrix) => {
+    const race = grandPrix.sessions.find((session) => session.type === "RACE") ?? grandPrix.sessions[0];
+    if (!race) {
+      return false;
+    }
+    const raceZoned = Temporal.ZonedDateTime.from({
+      timeZone: grandPrix.circuit.tz,
+      plainDateTime: Temporal.PlainDateTime.from(race.start)
+    });
+    return Temporal.Instant.compare(raceZoned.toInstant(), instant) > 0;
+  });
 }
 
 export function getResults(): ResultData {

@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { ArrowRightIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { getDictionary } from "@/lib/i18n";
-import { getSchedule } from "@/lib/data";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import QuickSearch, { QuickSearchItem } from "@/components/QuickSearch";
+import { getDictionary, type Locale } from "@/lib/i18n";
+import { getDrivers, getNextGrandPrix, getSchedule, getTeams } from "@/lib/data";
 import { countdown, formatDateTime, toUserZonedDateTime } from "@/lib/time";
+import type { Driver, Team } from "@/lib/types";
 
-async function getNextSession() {
-  const schedule = getSchedule();
-  const next = schedule[0];
+function getNextSession(liveLabel: string, locale: Locale) {
+  const next = getNextGrandPrix();
   if (!next) {
     return null;
   }
@@ -16,20 +17,62 @@ async function getNextSession() {
     grandPrix: next.grandPrix,
     circuit: next.circuit.name,
     location: next.circuit.location,
-    countdown: countdown(start),
-    startFormatted: formatDateTime(start)
+    countdown: countdown(start, liveLabel),
+    startFormatted: formatDateTime(start, locale)
   };
 }
 
-export default async function Hero() {
-  const dictionary = getDictionary("es");
-  const nextSession = await getNextSession();
+function buildSearchItems(drivers: Driver[], teams: Team[]): QuickSearchItem[] {
+  const teamsMap = new Map(teams.map((team) => [team.id, team]));
+  const driverItems = drivers.map((driver) => {
+    const team = teamsMap.get(driver.teamId);
+    return {
+      id: driver.id,
+      type: "driver" as const,
+      label: driver.name,
+      href: "#pilotos",
+      description: team ? `#${driver.number} · ${team.name}` : `#${driver.number}`
+    };
+  });
+
+  const teamItems = teams.map((team) => ({
+    id: team.id,
+    type: "team" as const,
+    label: team.name,
+    href: "#escuderias",
+    description: team.powerUnit ? `PU: ${team.powerUnit}` : undefined
+  }));
+
+  const circuits = new Map<string, QuickSearchItem>();
+  for (const grandPrix of getSchedule()) {
+    const { circuit } = grandPrix;
+    if (circuits.has(circuit.id)) {
+      continue;
+    }
+    circuits.set(circuit.id, {
+      id: circuit.id,
+      type: "circuit",
+      label: circuit.name,
+      href: "#calendario",
+      description: `${grandPrix.grandPrix} · ${circuit.location}`
+    });
+  }
+
+  return [...driverItems, ...teamItems, ...circuits.values()];
+}
+
+export default function Hero({ locale }: { locale: Locale }) {
+  const dictionary = getDictionary(locale);
+  const nextSession = getNextSession(dictionary.hero.countdown.live, locale);
+  const drivers = getDrivers();
+  const teams = getTeams();
+  const searchItems = buildSearchItems(drivers, teams);
 
   return (
     <section id="hero" className="container mx-auto mt-16 flex flex-col gap-10 px-6">
       <header className="flex flex-col gap-4">
         <p className="text-sm font-semibold uppercase tracking-[0.4em] text-ferrari/80">
-          Fórmula 1 · Temporada 2024
+          {dictionary.hero.badge}
         </p>
         <h1 className="text-4xl font-bold md:text-6xl">{dictionary.hero.title}</h1>
         <p className="max-w-3xl text-lg text-slate-300 md:text-xl">{dictionary.hero.subtitle}</p>
@@ -46,7 +89,7 @@ export default async function Hero() {
             </span>
           </div>
         ) : (
-          <p className="text-sm text-slate-400">Aún no hay carreras cargadas para esta temporada.</p>
+          <p className="text-sm text-slate-400">{dictionary.hero.emptyCalendar}</p>
         )}
       </header>
       <div className="grid gap-6 md:grid-cols-[1.5fr,1fr]">
@@ -55,43 +98,39 @@ export default async function Hero() {
             <>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-slate-400">Próxima carrera</p>
+                  <p className="text-xs uppercase tracking-widest text-slate-400">
+                    {dictionary.hero.nextRaceLabel}
+                  </p>
                   <p className="text-2xl font-semibold text-white">{nextSession.countdown}</p>
                 </div>
                 <div className="text-right text-sm text-slate-400">
                   <p>{nextSession.startFormatted}</p>
-                  <p>Hora local</p>
+                  <p>{dictionary.hero.timezoneLabel}</p>
                 </div>
               </div>
               <Link
                 href="#calendario"
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ferrari transition hover:text-ferrari/80"
               >
-                Ver calendario
+                {dictionary.hero.calendarCta}
                 <ArrowRightIcon className="h-4 w-4" />
               </Link>
             </>
           ) : (
-            <p className="text-sm text-slate-400">Completa el dataset de calendario para iniciar el conteo regresivo.</p>
+            <p className="text-sm text-slate-400">{dictionary.hero.emptyCalendar}</p>
           )}
         </div>
-        <form className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg">
+        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg">
           <label htmlFor="hero-search" className="text-xs uppercase tracking-widest text-slate-400">
-            Búsqueda rápida
+            {dictionary.hero.searchLabel}
           </label>
-          <div className="mt-3 flex items-center gap-2 rounded-xl border border-slate-700 bg-slate-900 px-3 py-2">
-            <MagnifyingGlassIcon className="h-5 w-5 text-slate-500" />
-            <input
-              id="hero-search"
-              type="search"
-              placeholder={dictionary.hero.searchPlaceholder}
-              className="h-10 flex-1 bg-transparent text-sm outline-none"
-            />
-          </div>
-          <p className="mt-2 text-xs text-slate-500">
-            Próximamente: búsqueda unificada de pilotos, equipos y circuitos.
-          </p>
-        </form>
+          <QuickSearch
+            placeholder={dictionary.hero.searchPlaceholder}
+            items={searchItems}
+            typeLabels={dictionary.hero.typeLabels}
+            emptyState={dictionary.hero.searchEmpty}
+          />
+        </div>
       </div>
     </section>
   );

@@ -1,26 +1,47 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { getDictionary, resolveLocale, SUPPORTED_LOCALES, type Locale, type Dictionary } from "@/lib/i18n";
 
-const SECTIONS = [
-  { id: "hero", label: "Inicio" },
-  { id: "live", label: "En vivo" },
-  { id: "calendario", label: "Calendario" },
-  { id: "pilotos", label: "Pilotos" },
-  { id: "escuderias", label: "Escuderías" },
-  { id: "autos", label: "Autos" },
-  { id: "cubiertas", label: "Cubiertas" },
-  { id: "banderas", label: "Banderas" },
-  { id: "clima", label: "Clima" },
-  { id: "resultados", label: "Resultados" },
-  { id: "acerca", label: "Acerca" }
-];
+const SECTION_ORDER = [
+  "hero",
+  "live",
+  "calendario",
+  "pilotos",
+  "escuderias",
+  "autos",
+  "cubiertas",
+  "banderas",
+  "clima",
+  "resultados",
+  "acerca"
+] as const;
+
+const SECTION_KEYS: Record<(typeof SECTION_ORDER)[number], keyof Dictionary["nav"]> = {
+  hero: "hero",
+  live: "live",
+  calendario: "calendar",
+  pilotos: "drivers",
+  escuderias: "teams",
+  autos: "cars",
+  cubiertas: "tyres",
+  banderas: "flags",
+  clima: "weather",
+  resultados: "results",
+  acerca: "about"
+};
 
 export default function AnchorNav() {
+  const searchParams = useSearchParams();
   const pathname = usePathname();
+  const router = useRouter();
   const [active, setActive] = useState<string>("hero");
+  const locale = resolveLocale(searchParams.get("lang"));
+  const dictionary = useMemo(() => getDictionary(locale), [locale]);
+  const searchString = searchParams.toString();
+  const basePath = searchString ? `${pathname}?${searchString}` : pathname;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,11 +55,26 @@ export default function AnchorNav() {
       { rootMargin: "-40% 0px -55% 0px" }
     );
 
-    const sections = SECTIONS.map((section) => document.getElementById(section.id));
+    const sections = SECTION_ORDER.map((section) => document.getElementById(section));
     sections.forEach((section) => section && observer.observe(section));
 
     return () => observer.disconnect();
   }, []);
+
+  const handleLocaleChange = useCallback(
+    (nextLocale: Locale) => {
+      const params = new URLSearchParams(searchParams);
+      if (nextLocale === "es") {
+        params.delete("lang");
+      } else {
+        params.set("lang", nextLocale);
+      }
+      const hash = typeof window !== "undefined" ? window.location.hash : "";
+      const target = params.toString() ? `${pathname}?${params.toString()}` : pathname;
+      router.replace(`${target}${hash}`, { scroll: false });
+    },
+    [pathname, router, searchParams]
+  );
 
   return (
     <nav
@@ -46,20 +82,36 @@ export default function AnchorNav() {
       className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/90 backdrop-blur"
     >
       <div className="container mx-auto flex items-center gap-3 overflow-x-auto px-6 py-3 text-sm text-slate-300">
-        <span className="font-semibold text-white">F1 Análisis</span>
-        {SECTIONS.map((section) => (
+        <span className="font-semibold text-white">{dictionary.hero.title}</span>
+        {SECTION_ORDER.map((section) => (
           <Link
-            key={section.id}
-            href={`${pathname}#${section.id}`}
+            key={section}
+            href={`${basePath}#${section}`}
             className={`rounded-full px-3 py-1 transition ${
-              active === section.id
+              active === section
                 ? "bg-ferrari text-white"
                 : "hover:bg-slate-800 hover:text-white"
             }`}
           >
-            {section.label}
+            {dictionary.nav[SECTION_KEYS[section]]}
           </Link>
         ))}
+        <div className="ml-auto flex items-center gap-2 text-xs uppercase">
+          {SUPPORTED_LOCALES.map((option) => (
+            <button
+              key={option}
+              type="button"
+              onClick={() => handleLocaleChange(option)}
+              className={`rounded-full px-3 py-1 transition ${
+                locale === option
+                  ? "bg-slate-800 text-white"
+                  : "border border-transparent text-slate-400 hover:border-slate-600 hover:text-white"
+              }`}
+            >
+              {option.toUpperCase()}
+            </button>
+          ))}
+        </div>
       </div>
     </nav>
   );

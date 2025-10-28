@@ -15,8 +15,8 @@ export function toUserZonedDateTime(
   return zoned.withTimeZone(userTimeZone ?? DEFAULT_TZ);
 }
 
-export function formatDateTime(zdt: Temporal.ZonedDateTime) {
-  return zdt.toLocaleString(undefined, {
+export function formatDateTime(zdt: Temporal.ZonedDateTime, locale?: string) {
+  return zdt.toLocaleString(locale, {
     weekday: "short",
     month: "short",
     day: "2-digit",
@@ -25,10 +25,13 @@ export function formatDateTime(zdt: Temporal.ZonedDateTime) {
   });
 }
 
-export function countdown(target: Temporal.ZonedDateTime) {
-  const now = Temporal.Now.zonedDateTimeISO(target.timeZone);
+export function countdown(
+  target: Temporal.ZonedDateTime,
+  liveLabel = "En vivo",
+  now: Temporal.ZonedDateTime = Temporal.Now.zonedDateTimeISO(target.timeZone)
+) {
   if (Temporal.ZonedDateTime.compare(now, target) >= 0) {
-    return "En vivo";
+    return liveLabel;
   }
   const diff = target.since(now, { largestUnit: "day" });
   const days = Math.max(diff.days, 0);
