@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="F1 Análisis icon">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dc0000" />
+      <stop offset="100%" stop-color="#6b0101" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="24" fill="url(#grad)" />
+  <path
+    d="M33 86h20l12-40h16l-12 40h26l4-14h16l-8 28H25z"
+    fill="#fff"
+    fill-rule="evenodd"
+  />
+</svg>

@@ -10,22 +10,25 @@ import Weather from "./(sections)/Weather";
 import Results from "./(sections)/Results";
 import About from "./(sections)/About";
 import { resolveLocale } from "@/lib/i18n";
+import LocaleProvider from "@/components/LocaleProvider";
 
 export default function HomePage({ searchParams }: { searchParams?: { lang?: string } }) {
   const locale = resolveLocale(searchParams?.lang);
   return (
-    <main>
-      <Hero locale={locale} />
-      <Live />
-      <Calendar />
-      <Drivers />
-      <Teams />
-      <Cars />
-      <Tyres />
-      <Flags />
-      <Weather />
-      <Results />
-      <About />
-    </main>
+    <LocaleProvider locale={locale}>
+      <main>
+        <Hero locale={locale} />
+        <Live />
+        <Calendar locale={locale} />
+        <Drivers locale={locale} />
+        <Teams locale={locale} />
+        <Cars locale={locale} />
+        <Tyres locale={locale} />
+        <Flags locale={locale} />
+        <Weather locale={locale} />
+        <Results locale={locale} />
+        <About locale={locale} />
+      </main>
+    </LocaleProvider>
   );
 }

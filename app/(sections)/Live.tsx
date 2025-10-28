@@ -1,7 +1,10 @@
 "use client";
 
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { SignalIcon } from "@heroicons/react/24/solid";
+import { useLocale } from "@/components/LocaleProvider";
+import { getDictionary } from "@/lib/i18n";
 
 interface LiveEntry {
   position: number;
@@ -18,18 +21,20 @@ interface LiveResponse {
   entries: LiveEntry[];
 }
 
-async function fetchLive(): Promise<LiveResponse> {
+async function fetchLive(errorMessage: string): Promise<LiveResponse> {
   const response = await fetch("/api/live", { cache: "no-store" });
   if (!response.ok) {
-    throw new Error("No se pudo cargar el live timing");
+    throw new Error(errorMessage);
   }
   return response.json();
 }
 
 export default function Live() {
+  const locale = useLocale();
+  const dictionary = useMemo(() => getDictionary(locale), [locale]);
   const { data, isLoading, error, refetch, isRefetching } = useQuery({
-    queryKey: ["live-timing"],
-    queryFn: fetchLive,
+    queryKey: ["live-timing", locale],
+    queryFn: () => fetchLive(dictionary.live.error),
     refetchInterval: 15_000
   });
 
@@ -38,11 +43,9 @@ export default function Live() {
       <header className="mb-6 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <div>
           <h2 id="live-title" className="flex items-center gap-2 text-3xl font-semibold">
-            <SignalIcon className="h-6 w-6 text-emerald-400" aria-hidden /> En Vivo
+            <SignalIcon className="h-6 w-6 text-emerald-400" aria-hidden /> {dictionary.live.title}
           </h2>
-          <p className="text-sm text-slate-400">
-            Datos de live timing (placeholder hasta conectar proveedor oficial).
-          </p>
+          <p className="text-sm text-slate-400">{dictionary.live.description}</p>
         </div>
         <button
           type="button"
@@ -50,11 +53,11 @@ export default function Live() {
           onClick={() => refetch()}
           disabled={isRefetching}
         >
-          {isRefetching ? "Actualizando…" : "Refrescar"}
+          {isRefetching ? dictionary.live.refreshLoading : dictionary.live.refreshIdle}
         </button>
       </header>
       <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg">
-        {isLoading && <p className="text-sm text-slate-400">Cargando datos en vivo…</p>}
+        {isLoading && <p className="text-sm text-slate-400">{dictionary.live.loading}</p>}
         {error && (
           <p role="alert" className="text-sm text-red-400">
             {(error as Error).message}
@@ -64,7 +67,7 @@ export default function Live() {
           <div className="space-y-2 text-sm text-slate-300">
             <p>{data.message}</p>
             <p className="text-xs text-slate-500">
-              Última actualización: {new Date(data.updatedAt).toLocaleTimeString()}
+              {dictionary.live.updatedAt}: {new Date(data.updatedAt).toLocaleTimeString(locale)}
             </p>
           </div>
         )}
@@ -73,11 +76,11 @@ export default function Live() {
             <table className="min-w-full divide-y divide-slate-800 text-sm">
               <thead>
                 <tr className="text-left text-xs uppercase tracking-widest text-slate-400">
-                  <th className="py-2">Pos</th>
-                  <th>Driver</th>
-                  <th>Gap</th>
-                  <th>Goma</th>
-                  <th>Última Vuelta</th>
+                  <th className="py-2">{dictionary.live.table.position}</th>
+                  <th>{dictionary.live.table.driver}</th>
+                  <th>{dictionary.live.table.gap}</th>
+                  <th>{dictionary.live.table.tyre}</th>
+                  <th>{dictionary.live.table.lastLap}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800 text-slate-200">

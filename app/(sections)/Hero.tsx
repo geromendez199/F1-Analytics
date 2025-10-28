@@ -6,7 +6,7 @@ import { getDrivers, getNextGrandPrix, getSchedule, getTeams } from "@/lib/data"
 import { countdown, formatDateTime, toUserZonedDateTime } from "@/lib/time";
 import type { Driver, Team } from "@/lib/types";
 
-function getNextSession() {
+function getNextSession(liveLabel: string, locale: Locale) {
   const next = getNextGrandPrix();
   if (!next) {
     return null;
@@ -17,8 +17,8 @@ function getNextSession() {
     grandPrix: next.grandPrix,
     circuit: next.circuit.name,
     location: next.circuit.location,
-    countdown: countdown(start),
-    startFormatted: formatDateTime(start)
+    countdown: countdown(start, liveLabel),
+    startFormatted: formatDateTime(start, locale)
   };
 }
 
@@ -63,7 +63,7 @@ function buildSearchItems(drivers: Driver[], teams: Team[]): QuickSearchItem[] {
 
 export default function Hero({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
-  const nextSession = getNextSession();
+  const nextSession = getNextSession(dictionary.hero.countdown.live, locale);
   const drivers = getDrivers();
   const teams = getTeams();
   const searchItems = buildSearchItems(drivers, teams);
@@ -72,7 +72,7 @@ export default function Hero({ locale }: { locale: Locale }) {
     <section id="hero" className="container mx-auto mt-16 flex flex-col gap-10 px-6">
       <header className="flex flex-col gap-4">
         <p className="text-sm font-semibold uppercase tracking-[0.4em] text-ferrari/80">
-          Fórmula 1 · Temporada 2024
+          {dictionary.hero.badge}
         </p>
         <h1 className="text-4xl font-bold md:text-6xl">{dictionary.hero.title}</h1>
         <p className="max-w-3xl text-lg text-slate-300 md:text-xl">{dictionary.hero.subtitle}</p>
@@ -89,7 +89,7 @@ export default function Hero({ locale }: { locale: Locale }) {
             </span>
           </div>
         ) : (
-          <p className="text-sm text-slate-400">Aún no hay carreras cargadas para esta temporada.</p>
+          <p className="text-sm text-slate-400">{dictionary.hero.emptyCalendar}</p>
         )}
       </header>
       <div className="grid gap-6 md:grid-cols-[1.5fr,1fr]">
@@ -98,24 +98,26 @@ export default function Hero({ locale }: { locale: Locale }) {
             <>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-slate-400">Próxima carrera</p>
+                  <p className="text-xs uppercase tracking-widest text-slate-400">
+                    {dictionary.hero.nextRaceLabel}
+                  </p>
                   <p className="text-2xl font-semibold text-white">{nextSession.countdown}</p>
                 </div>
                 <div className="text-right text-sm text-slate-400">
                   <p>{nextSession.startFormatted}</p>
-                  <p>Hora local</p>
+                  <p>{dictionary.hero.timezoneLabel}</p>
                 </div>
               </div>
               <Link
                 href="#calendario"
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ferrari transition hover:text-ferrari/80"
               >
-                Ver calendario
+                {dictionary.hero.calendarCta}
                 <ArrowRightIcon className="h-4 w-4" />
               </Link>
             </>
           ) : (
-            <p className="text-sm text-slate-400">Completa el dataset de calendario para iniciar el conteo regresivo.</p>
+            <p className="text-sm text-slate-400">{dictionary.hero.emptyCalendar}</p>
           )}
         </div>
         <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg">

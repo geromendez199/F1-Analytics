@@ -82,7 +82,7 @@ export default function AnchorNav() {
       className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/90 backdrop-blur"
     >
       <div className="container mx-auto flex items-center gap-3 overflow-x-auto px-6 py-3 text-sm text-slate-300">
-        <span className="font-semibold text-white">F1 Análisis</span>
+        <span className="font-semibold text-white">{dictionary.hero.title}</span>
         {SECTION_ORDER.map((section) => (
           <Link
             key={section}
