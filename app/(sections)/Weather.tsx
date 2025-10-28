@@ -1,14 +1,47 @@
 import { Suspense } from "react";
-import { getNextGrandPrix, getSampleWeather, getSchedule } from "@/lib/data";
+import { getNextGrandPrix, getSampleWeather } from "@/lib/data";
 import { getDictionary, type Dictionary, type Locale } from "@/lib/i18n";
 import type { WeatherData } from "@/lib/types";
+
+async function resolveTargetRound(base: string): Promise<number | undefined> {
+  try {
+    const response = await fetch(new URL("/api/circuits", base), { next: { revalidate: 5 * 60 } });
+    if (!response.ok) {
+      throw new Error("invalid response");
+    }
+
+    const data = await response.json();
+    const schedule = Array.isArray(data.schedule) ? data.schedule : [];
+    const now = Date.now();
+    const upcoming = schedule
+      .map((event: any) => {
+        const primarySession = Array.isArray(event.sessions)
+          ? (event.sessions.find((session: any) => session.type === "RACE") ?? event.sessions[0])
+          : undefined;
+        const startMs = primarySession?.start ? Date.parse(`${primarySession.start}Z`) : Number.POSITIVE_INFINITY;
+        return { round: event.round, startMs };
+      })
+      .filter((item: any) => Number.isFinite(item.startMs) && item.startMs > now)
+      .sort((a: any, b: any) => a.startMs - b.startMs)[0];
+
+    if (upcoming?.round) {
+      return Number.parseInt(String(upcoming.round), 10);
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error("Schedule API fallback", error);
+  }
+
+  const fallback = getNextGrandPrix();
+  return fallback?.round;
+}
 
 async function getWeather(locale: Locale): Promise<{ weather: WeatherData; live: boolean }> {
   const base =
     process.env.NEXT_PUBLIC_BASE_URL ??
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
   const url = new URL("/api/weather", base);
-  const targetRound = getNextGrandPrix()?.round ?? getSchedule().at(-1)?.round;
+  const targetRound = await resolveTargetRound(base);
   if (targetRound) {
     url.searchParams.set("gp", String(targetRound));
   }

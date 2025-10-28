@@ -1,8 +1,10 @@
 import { getDictionary, type Locale } from "@/lib/i18n";
+import { fetchTrackStatus } from "@/lib/services";
 
-export default function Flags({ locale }: { locale: Locale }) {
+export default async function Flags({ locale }: { locale: Locale }) {
   const dictionary = getDictionary(locale);
   const flags = dictionary.flags.items;
+  const trackStatus = await fetchTrackStatus().catch(() => null);
   return (
     <section id="banderas" aria-labelledby="flags-title" className="container mx-auto px-6">
       <header className="mb-8 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
@@ -12,6 +14,20 @@ export default function Flags({ locale }: { locale: Locale }) {
         </div>
         <span className="text-xs uppercase tracking-widest text-slate-500">{dictionary.flags.updatedAt}</span>
       </header>
+      <article className="mb-8 flex flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg md:flex-row md:items-center md:justify-between">
+        <div>
+          <p className="text-xs uppercase tracking-widest text-slate-400">{dictionary.flags.liveTitle}</p>
+          <h3 className="text-2xl font-semibold text-white">
+            {trackStatus?.flag ?? dictionary.flags.liveUnavailable}
+          </h3>
+          <p className="text-sm text-slate-300">
+            {trackStatus?.message ?? dictionary.flags.liveHint}
+          </p>
+        </div>
+        <span className="text-xs text-slate-500">
+          {dictionary.flags.liveUpdated}: {trackStatus ? new Date(trackStatus.updatedAt).toLocaleTimeString(locale) : "--"}
+        </span>
+      </article>
       <div className="grid gap-6 md:grid-cols-3">
         {flags.map((flag) => (
           <article

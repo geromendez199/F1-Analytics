@@ -8,6 +8,9 @@ import Tyres from "./(sections)/Tyres";
 import Flags from "./(sections)/Flags";
 import Weather from "./(sections)/Weather";
 import Results from "./(sections)/Results";
+import News from "./(sections)/News";
+import Highlights from "./(sections)/Highlights";
+import Telemetry from "./(sections)/Telemetry";
 import About from "./(sections)/About";
 import { resolveLocale } from "@/lib/i18n";
 import LocaleProvider from "@/components/LocaleProvider";
@@ -27,6 +30,9 @@ export default function HomePage({ searchParams }: { searchParams?: { lang?: str
         <Flags locale={locale} />
         <Weather locale={locale} />
         <Results locale={locale} />
+        <News locale={locale} />
+        <Highlights locale={locale} />
+        <Telemetry locale={locale} />
         <About locale={locale} />
       </main>
     </LocaleProvider>

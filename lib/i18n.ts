@@ -35,6 +35,9 @@ export const dictionaries = {
       flags: "Banderas",
       weather: "Clima",
       results: "Resultados",
+      news: "Noticias",
+      media: "Multimedia",
+      telemetry: "Telemetría",
       about: "Acerca"
     },
     live: {
@@ -129,6 +132,10 @@ export const dictionaries = {
       title: "Banderas",
       subtitle: "Interpretación rápida de las señales oficiales de la FIA.",
       updatedAt: "Actualizado 2024",
+      liveTitle: "Estado de pista en tiempo real",
+      liveUnavailable: "Sin datos",
+      liveHint: "Configura la Fórmula 1 Live API (RapidAPI) para habilitar banderas en vivo.",
+      liveUpdated: "Actualizado",
       items: [
         { id: "green", name: "Verde", description: "Pista libre. Se reanuda la velocidad de carrera.", color: "bg-green-500" },
         { id: "yellow", name: "Amarilla", description: "Precaución. No adelantar en el sector.", color: "bg-yellow-400" },
@@ -164,6 +171,36 @@ export const dictionaries = {
       driversLabel: "Pilotos",
       constructorsLabel: "Constructores",
       winnerTimeLabel: "Tiempo ganador"
+    },
+    news: {
+      title: "Noticias recientes",
+      subtitle: "Sigue la actualidad de la parrilla con fuentes globales.",
+      provider: "Fuente: NewsAPI",
+      empty: "Conecta la clave de NewsAPI para mostrar titulares en vivo.",
+      readMore: "Ver nota",
+      unknownDate: "Fecha no disponible"
+    },
+    highlights: {
+      title: "Highlights y clips",
+      subtitle: "Últimos videos oficiales y resúmenes de la F1.",
+      provider: "Fuente: YouTube Data API",
+      empty: "Agrega YOUTUBE_API_KEY para reproducir los últimos highlights.",
+      watch: "Ver en YouTube",
+      unknownChannel: "Canal oficial",
+      unknownDate: "Fecha no disponible"
+    },
+    telemetry: {
+      title: "Telemetría avanzada",
+      subtitle: "Comparativa de vueltas rápidas, velocidades y DRS desde FastF1.",
+      placeholderSession: "Sesión no disponible",
+      empty: "Conecta FASTF1_SERVICE_URL para exponer datos de telemetría.",
+      driver: "Piloto",
+      fastestLap: "Vuelta rápida",
+      topSpeed: "Velocidad máxima",
+      drs: "Activaciones DRS",
+      sectors: "Sectores",
+      sectorLabel: "Sector",
+      updated: "Actualizado"
     },
     about: {
       title: "Acerca del proyecto",
@@ -216,6 +253,9 @@ export const dictionaries = {
       flags: "Flags",
       weather: "Weather",
       results: "Results",
+      news: "News",
+      media: "Highlights",
+      telemetry: "Telemetry",
       about: "About"
     },
     live: {
@@ -310,6 +350,10 @@ export const dictionaries = {
       title: "Flags",
       subtitle: "Quick reference for official FIA signals.",
       updatedAt: "Updated 2024",
+      liveTitle: "Track status",
+      liveUnavailable: "Unavailable",
+      liveHint: "Configure the Formula 1 Live API (RapidAPI) to surface live flags.",
+      liveUpdated: "Updated",
       items: [
         { id: "green", name: "Green", description: "Track clear. Racing speed resumes.", color: "bg-green-500" },
         { id: "yellow", name: "Yellow", description: "Caution. No overtaking in the sector.", color: "bg-yellow-400" },
@@ -345,6 +389,36 @@ export const dictionaries = {
       driversLabel: "Drivers",
       constructorsLabel: "Constructors",
       winnerTimeLabel: "Winning time"
+    },
+    news: {
+      title: "Latest news",
+      subtitle: "Stay up to date with the paddock conversation.",
+      provider: "Source: NewsAPI",
+      empty: "Provide a NewsAPI key to surface live headlines.",
+      readMore: "Read article",
+      unknownDate: "Unknown date"
+    },
+    highlights: {
+      title: "Video highlights",
+      subtitle: "Official clips and recaps from the F1 ecosystem.",
+      provider: "Source: YouTube Data API",
+      empty: "Add YOUTUBE_API_KEY to fetch the latest highlights.",
+      watch: "Watch on YouTube",
+      unknownChannel: "Official channel",
+      unknownDate: "Unknown date"
+    },
+    telemetry: {
+      title: "Telemetry insights",
+      subtitle: "Compare laps, speeds and DRS usage powered by FastF1.",
+      placeholderSession: "Session unavailable",
+      empty: "Configure FASTF1_SERVICE_URL to expose telemetry data.",
+      driver: "Driver",
+      fastestLap: "Fastest lap",
+      topSpeed: "Top speed",
+      drs: "DRS activations",
+      sectors: "Sectors",
+      sectorLabel: "Sector",
+      updated: "Updated"
     },
     about: {
       title: "About the project",

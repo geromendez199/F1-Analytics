@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { Temporal } from "@js-temporal/polyfill";
-import { getGrandPrixByRound, getSampleWeather } from "@/lib/data";
+import { getSampleWeather } from "@/lib/data";
 import { resolveLocale } from "@/lib/i18n";
+import { fetchRaceByRound } from "@/lib/services";
 
 export const runtime = "edge";
 
@@ -20,17 +21,30 @@ async function fetchWeatherFromOpenWeather(round: string | undefined, locale: st
     return null;
   }
 
-  const grandPrix = getGrandPrixByRound(roundNumber);
-  const geo = grandPrix?.circuit.geo;
-  if (!geo) {
+  const race = await fetchRaceByRound(roundNumber);
+  if (!race) {
     return null;
   }
 
-  const sessions = grandPrix.sessions.filter((session) => session.type !== "FP2" && session.type !== "FP3");
-  const forecastSessions = sessions.length ? sessions.slice(0, 3) : grandPrix.sessions.slice(0, 3);
+  const lat = Number.parseFloat(race.Circuit.Location.lat);
+  const lng = Number.parseFloat(race.Circuit.Location.long);
+  if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
+    return null;
+  }
+
+  const sessions = [
+    { type: "FP1" as const, date: race.FirstPractice?.date, time: race.FirstPractice?.time },
+    { type: "FP2" as const, date: race.SecondPractice?.date, time: race.SecondPractice?.time },
+    { type: "FP3" as const, date: race.ThirdPractice?.date, time: race.ThirdPractice?.time },
+    { type: "SPRINT" as const, date: race.Sprint?.date ?? race.SprintShootout?.date, time: race.Sprint?.time ?? race.SprintShootout?.time },
+    { type: "QUALY" as const, date: race.Qualifying?.date ?? race.SprintQualifying?.date, time: race.Qualifying?.time ?? race.SprintQualifying?.time },
+    { type: "RACE" as const, date: race.date, time: race.time }
+  ].filter((session) => Boolean(session.date));
+
+  const forecastSessions = sessions.slice(0, 3);
 
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?lat=${geo.lat}&lon=${geo.lng}&appid=${apiKey}&units=metric&lang=${locale}`,
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric&lang=${locale}`,
     { next: { revalidate: 10 * 60 } }
   );
 
@@ -51,10 +65,13 @@ async function fetchWeatherFromOpenWeather(round: string | undefined, locale: st
   const nowDescription = firstEntry.weather?.[0]?.description ?? "";
 
   const forecast = forecastSessions.map((session) => {
-    const sessionStart = Temporal.ZonedDateTime.from({
-      timeZone: grandPrix.circuit.tz,
-      plainDateTime: Temporal.PlainDateTime.from(session.start)
-    }).toInstant();
+    const dateTime = `${session.date}T${(session.time ?? "00:00:00").replace("Z", "")}`;
+    let sessionInstant: Temporal.Instant;
+    try {
+      sessionInstant = Temporal.Instant.from(`${session.date}T${session.time ?? "00:00:00Z"}`);
+    } catch {
+      sessionInstant = Temporal.Instant.fromEpochMilliseconds(Date.parse(`${dateTime}Z`));
+    }
 
     let closest = firstEntry;
     let minDiff = Number.POSITIVE_INFINITY;
@@ -65,7 +82,7 @@ async function fetchWeatherFromOpenWeather(round: string | undefined, locale: st
       }
       try {
         const entryInstant = Temporal.Instant.fromEpochSeconds(entry.dt);
-        const diff = Math.abs(Number(entryInstant.epochMilliseconds - sessionStart.epochMilliseconds));
+        const diff = Math.abs(Number(entryInstant.epochMilliseconds - sessionInstant.epochMilliseconds));
         if (diff < minDiff) {
           minDiff = diff;
           closest = entry;

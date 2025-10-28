@@ -16,6 +16,9 @@ const SECTION_ORDER = [
   "banderas",
   "clima",
   "resultados",
+  "noticias",
+  "multimedia",
+  "telemetria",
   "acerca"
 ] as const;
 
@@ -30,6 +33,9 @@ const SECTION_KEYS: Record<(typeof SECTION_ORDER)[number], keyof Dictionary["nav
   banderas: "flags",
   clima: "weather",
   resultados: "results",
+  noticias: "news",
+  multimedia: "media",
+  telemetria: "telemetry",
   acerca: "about"
 };
 
